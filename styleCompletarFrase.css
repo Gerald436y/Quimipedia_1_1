@@ -1,5 +1,3 @@
-
-
 /* popo */
 
 .tip{
@@ -77,9 +75,10 @@ body {
     font-family: Arial, sans-serif;
     background-color: #c5a7ff;
     color: #333;
-  }
+    font-size: 1.15em; /* Aumenta el tamaño base de la fuente */
+}
 
-  header {
+header {
       display: flex;
       height: 70px;
       justify-content: flex-end;
@@ -93,7 +92,8 @@ body {
 
 
 .Titulo {
-    color: white; /* Cambiado a blanco puro */
+    color: white;
+    font-size: 2.1em; /* Más grande el título */
 }
 
   .logo {
@@ -260,7 +260,8 @@ body {
   font-weight: bold;
 }
 .respuestas {
-  margin-bottom: 20px;
+    font-size: 1.13em; /* Palabras arrastrables más grandes */
+    margin-bottom: 20px;
 }
 .botones {
   margin-top: 10px;
@@ -274,6 +275,7 @@ button {
   color: white;
   cursor: pointer;
   transition: 0.3s;
+  font-size: 1.13em; /* Botones más grandes */
 }
 button:hover {
   background-color: #270051;
