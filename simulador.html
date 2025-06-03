@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Decisiones: Experimento Químico Extendido</title>
+    <link rel="stylesheet" href="styleSimulador.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #eedfff;
+            color: #2c2b2c;
+            margin: 0;
+            padding: 0;
+        }
+
+
+        header h1 {
+            font-size: 2.5rem;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #bb7fc3;
+        }
+
+        .fondo {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: #2a1f57e4;
+        }
+
+        .opciones {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .opcion {
+            cursor: pointer;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 15px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: white;
+        }
+
+        .opcion:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .opcion img {
+            width: 100px;
+            height: 100px;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #2a1f57e4;
+        }
+
+        #puntaje {
+            margin-top: 10px;
+            font-size: 1.1em;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            font-size: 1em;
+            color: #6c757d;
+        }
+
+        #reiniciar {
+            margin-top: 20px;
+            padding: 15px 30px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #2e0a4e;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            transition: background-color 0.2s;
+        }
+        #reiniciar:hover {
+            background-color: rgb(126, 61, 173);
+        }
+    </style>   
+</head>
+<body>
+    <header>
+        <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+        <nav>
+            <ul>
+                <div class="cards">
+                    <a href="index.html" class="card red">
+                        <p class="tip">Inicio</p>
+                    </a>
+
+                    <a href="cuestionarios.html" class="card blue">
+                        <p class="tip">Cuestionarios</p>
+                    </a>
+
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="fondo">
+        <h1>Simulador de Decisiones: Experimento Químico Extendido</h1>
+        <div id="escenario">
+            <p id="descripcion">Estás en el laboratorio y debes elegir los reactivos para un experimento. ¿Qué haces?</p>
+            <div class="opciones">
+                <div class="opcion" onclick="tomarDecision('A')">
+                    <img src="IMG/elementoHCI.jpg" alt="HCl">
+                    <p>Usar Ácido Clorhídrico (HCl)</p>
+                </div>
+                <div class="opcion" onclick="tomarDecision('B')">
+                    <img src="IMG/elementoNaOH.jpg" alt="NaOH">
+                    <p>Usar Hidróxido de Sodio (NaOH)</p>
+                </div>
+                <div class="opcion" onclick="tomarDecision('C')">
+                    <img src="IMG/elementoH2O.jpg" alt="H₂O">
+                    <p>Usar Agua Destilada (H₂O)</p>
+                </div>
+            </div>
+        </div>
+        <div id="resultado"></div>
+        <div id="puntaje">Puntaje: 0</div>
+        <div id="feedback"></div>
+        <button id="reiniciar" onclick="reiniciarSimulador()">Reiniciar Simulador</button>
+    </div>
+
+    <script>
+        let paso = 1;
+        let puntaje = 0;
+        let experimentoCompletado = false;
+
+        function tomarDecision(decision) {
+            if (experimentoCompletado) return; 
+
+            let resultado = "";
+            let feedback = "";
+
+            switch (paso) {
+                case 1:
+                    if (decision === 'A') {
+                        resultado = "Has elegido Ácido Clorhídrico (HCl). ¡Cuidado! Es un ácido fuerte.";
+                        feedback = "El HCl es corrosivo. Asegúrate de usar equipo de protección.";
+                        paso = 2;
+                    } else if (decision === 'B') {
+                        resultado = "Has elegido Hidróxido de Sodio (NaOH). Es una base fuerte, maneja con precaución.";
+                        feedback = "El NaOH puede causar quemaduras. Usa guantes y gafas de seguridad.";
+                        paso = 2;
+                    } else if (decision === 'C') {
+                        resultado = "Has elegido Agua Destilada (H₂O). Es un solvente neutro y seguro.";
+                        feedback = "El agua destilada es segura, pero no producirá una reacción química.";
+                        paso = 2;
+                    }
+                    break;
+
+                case 2:
+                    if (decision === 'A') {
+                        resultado = "Has mezclado HCl con el compuesto. ¡Se produce una reacción exotérmica!";
+                        feedback = "La temperatura aumenta rápidamente. ¡Ten cuidado!";
+                        puntaje += 10;
+                        paso = 3;
+                    } else if (decision === 'B') {
+                        resultado = "Has mezclado NaOH con el compuesto. Se forma un precipitado.";
+                        feedback = "El precipitado indica una reacción química. Filtra la mezcla para continuar.";
+                        puntaje += 5;
+                        paso = 3;
+                    } else if (decision === 'C') {
+                        resultado = "Has mezclado H₂O con el compuesto. No hay reacción observable.";
+                        feedback = "El agua no reacciona con el compuesto. Intenta con otro reactivo.";
+                        puntaje += 2;
+                        paso = 3;
+                    }
+                    break;
+
+                case 3:
+                    if (decision === 'A') {
+                        resultado = "Has decidido calentar la mezcla. ¡Cuidado con los vapores tóxicos!";
+                        feedback = "El calor acelera la reacción, pero los vapores pueden ser peligrosos.";
+                        puntaje += 15;
+                        paso = 4;
+                    } else if (decision === 'B') {
+                        resultado = "Has decidido enfriar la mezcla. La reacción se ralentiza.";
+                        feedback = "El enfriamiento reduce la velocidad de la reacción, pero es más seguro.";
+                        puntaje += 10;
+                        paso = 4;
+                    } else if (decision === 'C') {
+                        resultado = "Has decidido dejar la mezcla a temperatura ambiente.";
+                        feedback = "La reacción continúa a un ritmo constante.";
+                        puntaje += 5;
+                        paso = 4;
+                    }
+                    break;
+
+                case 4:
+                    if (decision === 'A') {
+                        resultado = "Has agregado un indicador de pH. El color cambia a rojo.";
+                        feedback = "El cambio de color indica que la mezcla es ácida.";
+                        puntaje += 20;
+                        paso = 5;
+                    } else if (decision === 'B') {
+                        resultado = "Has agregado un indicador de pH. El color cambia a azul.";
+                        feedback = "El cambio de color indica que la mezcla es básica.";
+                        puntaje += 15;
+                        paso = 5;
+                    } else if (decision === 'C') {
+                        resultado = "Has decidido no agregar un indicador de pH.";
+                        feedback = "No sabes el pH de la mezcla. Intenta con otro método.";
+                        puntaje += 5;
+                        paso = 5;
+                    }
+                    break;
+
+                case 5:
+                    if (decision === 'A') {
+                        resultado = "Has neutralizado el ácido. ¡Buen trabajo!";
+                        feedback = "El pH del compuesto es ahora neutro. ¡Experimento completado con éxito!";
+                        puntaje += 30;
+                    } else if (decision === 'B') {
+                        resultado = "Has neutralizado la base. ¡Bien hecho!";
+                        feedback = "El pH del compuesto es ahora neutro. ¡Experimento completado con éxito!";
+                        puntaje += 25;
+                    } else if (decision === 'C') {
+                        resultado = "No has neutralizado el compuesto. Intenta de nuevo.";
+                        feedback = "El compuesto sigue siendo ácido/básico. Intenta con otro reactivo.";
+                        puntaje += 10;
+                    }
+                    experimentoCompletado = true;
+                    break;
+            }
+
+            document.getElementById("resultado").textContent = resultado;
+            document.getElementById("puntaje").textContent = `Puntaje: ${puntaje}`;
+            document.getElementById("feedback").textContent = feedback;
+            actualizarDescripcion();
+        }
+
+        function actualizarDescripcion() {
+            const descripciones = [
+                "Estás en el laboratorio y debes elegir los reactivos para un experimento. ¿Qué haces?",
+                "Ahora, elige cómo proceder con el experimento:",
+                "Decide cómo manipular la temperatura de la mezcla:",
+                "Agrega un indicador de pH para determinar la acidez o basicidad:",
+                "Finalmente, neutraliza el compuesto:"
+            ];
+            document.getElementById("descripcion").textContent = descripciones[paso - 1];
+        }
+
+        function reiniciarSimulador() {
+            paso = 1;
+            puntaje = 0;
+            experimentoCompletado = false;
+            document.getElementById("descripcion").textContent = "Estás en el laboratorio y debes elegir los reactivos para un experimento. ¿Qué haces?";
+            document.getElementById("resultado").textContent = "";
+            document.getElementById("puntaje").textContent = "Puntaje: 0";
+            document.getElementById("feedback").textContent = "";
+        }
+    </script>
+</body>
+</html>

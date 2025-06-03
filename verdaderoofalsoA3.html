@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario Verdadero o Falso</title>
+    <link rel="stylesheet" href="styleVoF.css">
+</head>
+<!--popo */-->
+<header>
+  <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+  <nav>
+    
+      <ul>
+          <div class="cards">
+              <a href="index.html" class="card red">
+                  <p class="tip">Inicio</p>
+              </a>
+
+              <a href="cuestionarioA3.html" class="card blue">
+                  <p class="tip">Cuestionario</p>
+              </a>
+
+              <a href="articulo3.html" class="card green">
+                  <p class="tip">Ver articulo</p>
+              </a>
+              </div>
+          </div>
+      </div>
+  </nav>
+</header>
+<!-- se acaba la popo */-->
+
+<body>
+    <div class="quiz-container">
+        <h2>¿Verdadero o Falso?</h2>
+        <form id="quiz-form">
+            <p>
+                1. Un átomo es la unidad constituyente más pequeña de la materia que tiene las propiedades de 
+                un elemento químico y que puede intervenir en una combinación química. <br><br>
+                <img src="https://marcoc76.github.io/guacamole/img/nucleo.gif">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1" name="q1" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q1" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+            <p>
+                2. Los átomos y, por 
+                lo tanto, toda la materia, se componen principalmente de tres partículas fundamentales: 
+                electrones, protones y neutrones. <br><br>
+                <img src="https://i.pinimg.com/originals/24/1c/34/241c343b3ea096a651f0db708070d00f.gif">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1" name="q2" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q2" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+            <p>
+                3. El número de protones en un átomo recibe el nombre de Masa molar(M).<br><br>
+                <img src="https://specac.com/wp-content/uploads/2022/05/XRF-Fig-1.gif">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1" name="q3" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q3" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+            <p>
+                4.  El número total de protones y neutrones de un átomo se llama número másico (A).<br><br>
+                <img src="https://booksandbooksdigital.com.co/ovas_unad/OVA-008/dist/assets/images/slide10_1.gif">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1"  name="q4" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q4" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+            <p>
+                5.  Las partículas subatómicas se clasifican según la masa atomica y, lo que permite
+                entender mejor su comportamiento y propiedades.<br><br>
+                <img src="https://media3.giphy.com/media/lyLRTrqRpW8YU/giphy.gif?cid=a267dfa33k2fd5j7w6a9j09utoio48y4whp08oih67d4cg1c&rid=giphy.gif">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1"  name="q5" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q5" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+
+
+
+            <button type="button" onclick="calificar()">Enviar</button>
+        </form>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function calificar() {
+            let respuestasCorrectas = { q1: "true", q2: "true", q3: "false", q4: "true", q5:"false" };
+            let puntuacion = 0;
+            let totalPreguntas = Object.keys(respuestasCorrectas).length;
+
+            for (let key in respuestasCorrectas) {
+                let seleccion = document.querySelector(`input[name="${key}"]:checked`);
+                if (seleccion && seleccion.value === respuestasCorrectas[key]) {
+                    puntuacion++;
+                }
+            }
+
+            let mensaje = `Obtuviste ${puntuacion} de ${totalPreguntas} respuestas correctas.`;
+            document.getElementById("resultado").innerText = mensaje;
+
+            if (puntuacion === totalPreguntas) {
+                let img = document.getElementById("imagen-resultado");
+                img.src = "https://dbdzm869oupei.cloudfront.net/img/sticker/preview/16479.png";
+                img.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

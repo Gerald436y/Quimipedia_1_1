@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Teoría atómica de Bohr</title>
+    <link rel="stylesheet" href="styleCuestionario.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+        <nav>
+            <ul>
+                <div class="cards">
+                    <a href="index.html" class="card red">
+                        <p class="tip">Inicio</p>
+                    </a>
+
+                    <a href="verdaderoofalsoA3.html" class="card blue">
+                        <p class="tip">Verdadero o Falso</p>
+                    </a>
+
+                    <a href="articulo3.html" class="card green">
+                        <p class="tip">Artículo</p>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="barra-superior">
+        <div class="temporizador" id="temporizador">Tiempo restante: 02:30</div>
+        <div class="intentos-restantes" id="intentosRestantes">Intentos restantes: 3</div>
+    </div>
+
+    <main>
+        <h2>Cuestionario de la base experimental de la teoría cuántica</h2>
+
+        <form id="quiz-form">
+            <div id="preguntas-container"></div>
+            <div class="botones">
+                <button type="button" onclick="calcularResultado()">Enviar respuestas</button>
+                <button type="button" id="btnReiniciar" onclick="reiniciarCuestionario()">Reiniciar cuestionario</button>
+            </div>
+        </form>
+
+        <div id="resultado"></div>
+        <div id="trophy">
+            <img src="IMG/trophy-6387_256.gif" alt="Copa de Premio">
+            <p>¡Felicidades! Has respondido todas las preguntas correctamente.</p>
+        </div>
+    </main>
+
+    <script>
+        const preguntas = [
+    {
+        id: 1,
+        pregunta: "¿Qué experimento demostró por primera vez la naturaleza cuántica de la luz?",
+        opciones: [
+            { texto: "Experimento de la doble rendija", valor: "doble_rendija" },
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Experimento de Stern-Gerlach", valor: "stern_gerlach" },
+            { texto: "Experimento de Michelson-Morley", valor: "michelson_morley" }
+        ],
+        respuestaCorrecta: "efecto_fotoelectrico"
+    },
+    {
+        id: 2,
+        pregunta: "¿Quién explicó el efecto fotoeléctrico proponiendo que la luz está compuesta por cuantos de energía?",
+        opciones: [
+            { texto: "Niels Bohr", valor: "bohr" },
+            { texto: "Albert Einstein", valor: "einstein" },
+            { texto: "Max Planck", valor: "planck" },
+            { texto: "Werner Heisenberg", valor: "heisenberg" }
+        ],
+        respuestaCorrecta: "einstein"
+    },
+    {
+        id: 3,
+        pregunta: "¿Qué fenómeno demostró que los electrones tienen propiedades de onda?",
+        opciones: [
+            { texto: "Efecto Compton", valor: "compton" },
+            { texto: "Difracción de electrones", valor: "difraccion_electrones" },
+            { texto: "Efecto Zeeman", valor: "zeeman" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" }
+        ],
+        respuestaCorrecta: "difraccion_electrones"
+    },
+    {
+        id: 4,
+        pregunta: "¿Qué experimento confirmó la dualidad onda-partícula de los electrones?",
+        opciones: [
+            { texto: "Experimento de Young", valor: "young" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" },
+            { texto: "Experimento de Millikan", valor: "millikan" },
+            { texto: "Experimento de Rutherford", valor: "rutherford" }
+        ],
+        respuestaCorrecta: "davisson_germer"
+    },
+    {
+        id: 5,
+        pregunta: "¿Qué postuló Max Planck para explicar la radiación de cuerpo negro?",
+        opciones: [
+            { texto: "La luz está compuesta por fotones", valor: "fotones" },
+            { texto: "La energía está cuantizada", valor: "energia_cuantizada" },
+            { texto: "Los electrones tienen spin", valor: "spin" },
+            { texto: "Las partículas tienen dualidad onda-partícula", valor: "dualidad" }
+        ],
+        respuestaCorrecta: "energia_cuantizada"
+    },
+    {
+        id: 6,
+        pregunta: "¿Qué experimento demostró la cuantización del espacio de las partículas cargadas en un campo magnético?",
+        opciones: [
+            { texto: "Efecto Hall cuántico", valor: "hall_cuantico" },
+            { texto: "Efecto Zeeman", valor: "zeeman" },
+            { texto: "Efecto Stark", valor: "stark" },
+            { texto: "Efecto Compton", valor: "compton" }
+        ],
+        respuestaCorrecta: "hall_cuantico"
+    },
+    {
+        id: 7,
+        pregunta: "¿Qué experimento demostró la existencia del spin del electrón?",
+        opciones: [
+            { texto: "Experimento de Stern-Gerlach", valor: "stern_gerlach" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Young", valor: "young" },
+            { texto: "Experimento de Michelson-Morley", valor: "michelson_morley" }
+        ],
+        respuestaCorrecta: "stern_gerlach"
+    },
+    {
+        id: 8,
+        pregunta: "¿Qué fenómeno demostró que los fotones tienen momento?",
+        opciones: [
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Efecto Compton", valor: "compton" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Difracción de electrones", valor: "difraccion_electrones" }
+        ],
+        respuestaCorrecta: "compton"
+    },
+    {
+        id: 9,
+        pregunta: "¿Qué experimento confirmó la cuantización de los niveles de energía en los átomos?",
+        opciones: [
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" },
+            { texto: "Experimento de Millikan", valor: "millikan" },
+            { texto: "Experimento de Rutherford", valor: "rutherford" }
+        ],
+        respuestaCorrecta: "franck_hertz"
+    },
+    {
+        id: 10,
+        pregunta: "¿Qué fenómeno demostró que la luz puede comportarse como partícula?",
+        opciones: [
+            { texto: "Difracción", valor: "difraccion" },
+            { texto: "Interferencia", valor: "interferencia" },
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Refracción", valor: "refraccion" }
+        ],
+        respuestaCorrecta: "efecto_fotoelectrico"
+    },
+    {
+        id: 11,
+        pregunta: "¿Qué experimento demostró que los electrones pueden interferir consigo mismos?",
+        opciones: [
+            { texto: "Experimento de la doble rendija", valor: "doble_rendija" },
+            { texto: "Experimento de Stern-Gerlach", valor: "stern_gerlach" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Millikan", valor: "millikan" }
+        ],
+        respuestaCorrecta: "doble_rendija"
+    },
+    {
+        id: 12,
+        pregunta: "¿Qué fenómeno demostró que la energía de los fotones depende de su frecuencia?",
+        opciones: [
+            { texto: "Efecto Compton", valor: "compton" },
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Difracción de electrones", valor: "difraccion_electrones" }
+        ],
+        respuestaCorrecta: "efecto_fotoelectrico"
+    },
+    {
+        id: 13,
+        pregunta: "¿Qué experimento demostró la existencia de niveles de energía discretos en los átomos?",
+        opciones: [
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" },
+            { texto: "Experimento de Millikan", valor: "millikan" },
+            { texto: "Experimento de Rutherford", valor: "rutherford" }
+        ],
+        respuestaCorrecta: "franck_hertz"
+    },
+    {
+        id: 14,
+        pregunta: "¿Qué fenómeno demostró que los electrones tienen un momento angular intrínseco?",
+        opciones: [
+            { texto: "Efecto Zeeman", valor: "zeeman" },
+            { texto: "Efecto Stark", valor: "stark" },
+            { texto: "Efecto Hall cuántico", valor: "hall_cuantico" },
+            { texto: "Efecto Compton", valor: "compton" }
+        ],
+        respuestaCorrecta: "zeeman"
+    },
+    {
+        id: 15,
+        pregunta: "¿Qué experimento demostró que los átomos tienen un núcleo denso y cargado positivamente?",
+        opciones: [
+            { texto: "Experimento de Rutherford", valor: "rutherford" },
+            { texto: "Experimento de Millikan", valor: "millikan" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" }
+        ],
+        respuestaCorrecta: "rutherford"
+    },
+    {
+        id: 16,
+        pregunta: "¿Qué fenómeno demostró que la luz puede transferir momento a las partículas?",
+        opciones: [
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Efecto Compton", valor: "compton" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Difracción de electrones", valor: "difraccion_electrones" }
+        ],
+        respuestaCorrecta: "compton"
+    },
+    {
+        id: 17,
+        pregunta: "¿Qué experimento demostró que los electrones pueden comportarse como ondas?",
+        opciones: [
+            { texto: "Experimento de la doble rendija", valor: "doble_rendija" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Millikan", valor: "millikan" }
+        ],
+        respuestaCorrecta: "davisson_germer"
+    },
+    {
+        id: 18,
+        pregunta: "¿Qué fenómeno demostró que la energía de los electrones en un átomo está cuantizada?",
+        opciones: [
+            { texto: "Efecto Zeeman", valor: "zeeman" },
+            { texto: "Efecto Stark", valor: "stark" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Espectros atómicos", valor: "espectros_atomicos" }
+        ],
+        respuestaCorrecta: "espectros_atomicos"
+    },
+    {
+        id: 19,
+        pregunta: "¿Qué experimento demostró que los electrones tienen un momento magnético intrínseco?",
+        opciones: [
+            { texto: "Experimento de Stern-Gerlach", valor: "stern_gerlach" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Millikan", valor: "millikan" },
+            { texto: "Experimento de Rutherford", valor: "rutherford" }
+        ],
+        respuestaCorrecta: "stern_gerlach"
+    },
+    {
+        id: 20,
+        pregunta: "¿Qué fenómeno demostró que la luz puede ser absorbida o emitida en cantidades discretas de energía?",
+        opciones: [
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Espectros atómicos", valor: "espectros_atomicos" },
+            { texto: "Difracción de electrones", valor: "difraccion_electrones" }
+        ],
+        respuestaCorrecta: "cuerpo_negro"
+    },
+    {
+        id: 21,
+        pregunta: "¿Qué experimento demostró que los electrones pueden ser difractados?",
+        opciones: [
+            { texto: "Experimento de la doble rendija", valor: "doble_rendija" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Millikan", valor: "millikan" }
+        ],
+        respuestaCorrecta: "davisson_germer"
+    },
+    {
+        id: 22,
+        pregunta: "¿Qué fenómeno demostró que los fotones tienen energía proporcional a su frecuencia?",
+        opciones: [
+            { texto: "Efecto Compton", valor: "compton" },
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Difracción de electrones", valor: "difraccion_electrones" }
+        ],
+        respuestaCorrecta: "efecto_fotoelectrico"
+    },
+    {
+        id: 23,
+        pregunta: "¿Qué experimento demostró que los átomos tienen niveles de energía discretos?",
+        opciones: [
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" },
+            { texto: "Experimento de Millikan", valor: "millikan" },
+            { texto: "Experimento de Rutherford", valor: "rutherford" }
+        ],
+        respuestaCorrecta: "franck_hertz"
+    },
+    {
+        id: 24,
+        pregunta: "¿Qué fenómeno demostró que los electrones tienen un momento angular intrínseco?",
+        opciones: [
+            { texto: "Efecto Zeeman", valor: "zeeman" },
+            { texto: "Efecto Stark", valor: "stark" },
+            { texto: "Efecto Hall cuántico", valor: "hall_cuantico" },
+            { texto: "Efecto Compton", valor: "compton" }
+        ],
+        respuestaCorrecta: "zeeman"
+    },
+    {
+        id: 25,
+        pregunta: "¿Qué experimento demostró que los átomos tienen un núcleo denso y cargado positivamente?",
+        opciones: [
+            { texto: "Experimento de Rutherford", valor: "rutherford" },
+            { texto: "Experimento de Millikan", valor: "millikan" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" }
+        ],
+        respuestaCorrecta: "rutherford"
+    },
+    {
+        id: 26,
+        pregunta: "¿Qué fenómeno demostró que la luz puede transferir momento a las partículas?",
+        opciones: [
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Efecto Compton", valor: "compton" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Difracción de electrones", valor: "difraccion_electrones" }
+        ],
+        respuestaCorrecta: "compton"
+    },
+    {
+        id: 27,
+        pregunta: "¿Qué experimento demostró que los electrones pueden comportarse como ondas?",
+        opciones: [
+            { texto: "Experimento de la doble rendija", valor: "doble_rendija" },
+            { texto: "Experimento de Davisson-Germer", valor: "davisson_germer" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Millikan", valor: "millikan" }
+        ],
+        respuestaCorrecta: "davisson_germer"
+    },
+    {
+        id: 28,
+        pregunta: "¿Qué fenómeno demostró que la energía de los electrones en un átomo está cuantizada?",
+        opciones: [
+            { texto: "Efecto Zeeman", valor: "zeeman" },
+            { texto: "Efecto Stark", valor: "stark" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Espectros atómicos", valor: "espectros_atomicos" }
+        ],
+        respuestaCorrecta: "espectros_atomicos"
+    },
+    {
+        id: 29,
+        pregunta: "¿Qué experimento demostró que los electrones tienen un momento magnético intrínseco?",
+        opciones: [
+            { texto: "Experimento de Stern-Gerlach", valor: "stern_gerlach" },
+            { texto: "Experimento de Franck-Hertz", valor: "franck_hertz" },
+            { texto: "Experimento de Millikan", valor: "millikan" },
+            { texto: "Experimento de Rutherford", valor: "rutherford" }
+        ],
+        respuestaCorrecta: "stern_gerlach"
+    },
+    {
+        id: 30,
+        pregunta: "¿Qué fenómeno demostró que la luz puede ser absorbida o emitida en cantidades discretas de energía?",
+        opciones: [
+            { texto: "Efecto fotoeléctrico", valor: "efecto_fotoelectrico" },
+            { texto: "Radiación de cuerpo negro", valor: "cuerpo_negro" },
+            { texto: "Espectros atómicos", valor: "espectros_atomicos" },
+            { texto: "Difracción de electrones", valor: "difraccion_electrones" }
+        ],
+        respuestaCorrecta: "cuerpo_negro"
+    }
+];
+
+
+     let preguntasSeleccionadas = [];
+    let tiempoRestante = 150; 
+    let intervalo;
+    let reiniciosRealizados = 0;
+
+    function iniciarTemporizador() {
+        // Limpiar intervalo previo SIEMPRE
+        clearInterval(intervalo);
+        
+        intervalo = setInterval(() => {
+            tiempoRestante--;
+            actualizarTemporizador();
+            if (tiempoRestante <= 0) {
+                clearInterval(intervalo);
+                calcularResultado();
+                alert("¡Tiempo agotado! Se han enviado tus respuestas.");
+            }
+        }, 1000);
+    }
+
+    function actualizarTemporizador() {
+        const minutos = Math.floor(tiempoRestante / 60);
+        const segundos = tiempoRestante % 60;
+        document.getElementById("temporizador").textContent = `Tiempo restante: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    }
+
+    function seleccionarPreguntasAleatorias() {
+        preguntasSeleccionadas = preguntas.sort(() => Math.random() - 0.5).slice(0, 10);
+    }
+
+     function mostrarPreguntas() {
+        const contenedor = document.getElementById("preguntas-container");
+        contenedor.innerHTML = "";
+
+        preguntasSeleccionadas.forEach((pregunta, index) => {
+            const numPregunta = index + 1;
+            const divPregunta = document.createElement("div");
+            divPregunta.classList.add("question");
+
+            const textoPregunta = document.createElement("p");
+            textoPregunta.textContent = `${numPregunta}. ${pregunta.pregunta}`;
+            divPregunta.appendChild(textoPregunta);
+
+            pregunta.opciones.forEach(opcion => {
+                const label = document.createElement("label");
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = `q${numPregunta}`;
+                input.value = opcion.valor;
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(` ${opcion.texto}`));
+                divPregunta.appendChild(label);
+            });
+
+            const feedback = document.createElement("p");
+            feedback.classList.add("feedback");
+            feedback.id = `feedback-q${numPregunta}`;
+            divPregunta.appendChild(feedback);
+
+            contenedor.appendChild(divPregunta);
+        });
+    }
+
+    function calcularResultado() {
+        let puntaje = 0;
+        preguntasSeleccionadas.forEach((pregunta, index) => {
+            const numPregunta = index + 1;
+            const seleccion = document.querySelector(`input[name="q${numPregunta}"]:checked`);
+            const feedbackElement = document.getElementById(`feedback-q${numPregunta}`);
+
+            if (seleccion && seleccion.value === pregunta.respuestaCorrecta) {
+                puntaje++;
+                feedbackElement.textContent = "¡Correcto!";
+                feedbackElement.style.color = "green";
+            } else {
+                feedbackElement.textContent = `Incorrecto. La respuesta correcta es: ${pregunta.respuestaCorrecta}`;
+                feedbackElement.style.color = "red";
+            }
+        });
+
+        const resultadoElement = document.getElementById("resultado");
+        resultadoElement.innerHTML = `Tu puntaje es: ${puntaje} de ${preguntasSeleccionadas.length}`;
+
+        if (puntaje === preguntasSeleccionadas.length) {
+            document.getElementById("trophy").style.display = "block";
+        } else {
+            document.getElementById("trophy").style.display = "none";
+        }
+
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.disabled = true;
+        });
+
+        const botonEnviar = document.querySelector('button[onclick="calcularResultado()"]');
+        botonEnviar.disabled = true;
+    }
+
+    function reiniciarCuestionario() {
+        // Incrementar contador de reinicios ANTES de verificar
+        reiniciosRealizados++;
+
+        // Verificar si es el último intento (2 reinicios + carga inicial = 3)
+        if (reiniciosRealizados >= 2) {
+            bloquearBotonReinicio();
+        }
+
+        // Reiniciar componentes del cuestionario
+        seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+        document.getElementById("resultado").innerHTML = "";
+        document.getElementById("trophy").style.display = "none";
+
+        // REINICIAR TEMPORIZADOR (corrección clave)
+        tiempoRestante = 150;
+        actualizarTemporizador();
+        iniciarTemporizador();
+
+        // Restablecer controles
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+            radio.disabled = false;
+        });
+
+        const botonEnviar = document.querySelector('button[onclick="calcularResultado()"]');
+        if (botonEnviar) botonEnviar.disabled = false;
+
+        actualizarIntentosRestantes();
+    }
+
+    function bloquearBotonReinicio() {
+        const botonReiniciar = document.getElementById('btnReiniciar');
+        botonReiniciar.disabled = true;
+        botonReiniciar.style.backgroundColor = "#bbb";
+        botonReiniciar.style.color = "#666";
+        botonReiniciar.style.cursor = "not-allowed";
+        botonReiniciar.textContent = "Reinicio bloqueado";
+    }
+
+    function actualizarIntentosRestantes() {
+        // Ajustado: 3 intentos totales (1 inicial + 2 reinicios)
+        const intentosRestantes = 2 - reiniciosRealizados; 
+        const intentosDiv = document.getElementById("intentosRestantes");
+        
+        if (intentosDiv) {
+            intentosDiv.textContent = `Intentos restantes: ${intentosRestantes}`;
+            intentosDiv.classList.toggle("cero", intentosRestantes === 0);
+        }
+    }
+
+    window.onload = function() {
+        // Inicialización cuenta como primer intento
+        seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+        actualizarTemporizador();
+        iniciarTemporizador();
+        actualizarIntentosRestantes(); // Mostrará 2 intentos restantes
+    };
+</script>
+</body>
+</html>

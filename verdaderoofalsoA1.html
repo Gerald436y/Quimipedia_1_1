@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verdadero o Falso Teoría atómica de Bohr</title>
+    <link rel="stylesheet" href="styleVoF.css">
+</head>
+<!--popo */-->
+<header>
+  <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+  <nav>
+    
+      <ul>
+          <div class="cards">
+              <a href="index.html" class="card red">
+                
+                  <p class="tip">Inicio</p>
+              </a>
+
+              <a href="cuestionarioA1.html" class="card blue">
+                  <p class="tip">Cuestionario</p>
+              </a>
+
+              <a href="articulo1.html" class="card green">
+                  <p class="tip">Ver articulo</p>
+              </a>
+              </div>
+          </div>
+      </div>
+  </nav>
+</header>
+<!-- se acaba la popo */-->
+
+<body>
+    <div class="quiz-container">
+        <h2>¿Verdadero o Falso?</h2>
+        <form id="quiz-form">
+            <p>
+                1. Bohr supuso que los electrones se encuentran y giran en órbitas definidas y que cada una
+                contiene una cantidad de energía, por esta razón los llamó niveles de energía. <br><br>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/9/90/%C3%81tomo_de_Oro.gif">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1" name="q1" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q1" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+            <p>
+                2. si el electrón “salta” a un nivel de energía superior pierde electrones y se
+                produce un espectro de absorción. <br><br>
+                <img src="https://clipart-library.com/image_gallery/65575.gif">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1" name="q2" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q2" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+            <p>
+                3. |Fe|= K|q1q2/r2| <br>siendo r la distancia entre las cargas<br><br>
+                <img src="https://energywavetheory.com/wp-content/uploads/2019/10/coulombs-equation-and-the-electrical-force-of-particles.jpg">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1" name="q3" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q3" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+            <p>
+                4.  La ecuación (4), deducida en el libro de Tipler (1978), establece una relación entre 3
+                variables: v, r y f. Si una de ellas es desconocida, la otra puede ser determinada.<br><br>
+                <img src="https://lh4.googleusercontent.com/WR9vOtJAuMVCLNG-x6lYzdgpY6NAw-KeqmOnUfM6ieDY0rO9TMMMCf8wWVvVBMPGgvpMo3_fPHg4aK2P0viOPUg4Sf_UcTj7j8hxH8J2CfXV2UUzLKy5J-8eaToHv1lvgxX30UJ4">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1"  name="q4" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q4" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+            <p>
+                5.  En los casos
+                macroscópicos, como el gravitatorio y de fuerza electrostática, existe un límite para escoger esos
+                de valores y el número de soluciones es limitado.<br><br>
+                <img src="https://cerebriti.b-cdn.net/uploads/8b17c0d70c1987b66db89f0a4a07322d.gif">
+                <div class="radio-input">
+                    <label>
+                      <input type="radio" id="value-1"  name="q5" value="true" />
+                      <span>Verdadero</span>
+                    </label>
+                    <label>
+                      <input type="radio" id="value-2" name="q5" value="false" />
+                      <span>Falso</span>
+                    </label>
+                    <span class="selection"></span>
+                </div>
+            </p>
+
+
+
+            <button type="button" onclick="calificar()">Enviar</button>
+        </form>
+        <p id="resultado"></p>
+    </div>
+
+    <script>
+        function calificar() {
+            let respuestasCorrectas = { q1: "true", q2: "false", q3: "true", q4: "false", q5:"false" };
+            let puntuacion = 0;
+            let totalPreguntas = Object.keys(respuestasCorrectas).length;
+
+            for (let key in respuestasCorrectas) {
+                let seleccion = document.querySelector(`input[name="${key}"]:checked`);
+                if (seleccion && seleccion.value === respuestasCorrectas[key]) {
+                    puntuacion++;
+                }
+            }
+
+            let mensaje = `Obtuviste ${puntuacion} de ${totalPreguntas} respuestas correctas.`;
+            document.getElementById("resultado").innerText = mensaje;
+
+            if (puntuacion === totalPreguntas) {
+                let img = document.getElementById("imagen-resultado");
+                img.src = "https://dbdzm869oupei.cloudfront.net/img/sticker/preview/16479.png";
+                img.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>

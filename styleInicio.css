@@ -1,0 +1,464 @@
+.articulos-container {
+  display: grid;
+  grid-template-columns: repeat(3, 230px);
+  grid-gap: 15px 110px;
+  justify-items: center;
+  padding: 10px 145px;
+  max-width: 1200px;
+  margin: 0 auto;
+  }
+/* From Uiverse.io by gagan-gv*/ 
+
+ header img{
+    margin-left: 560px;
+  }
+
+  .articulo {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 40px;
+  transition: transform 0.3s;
+  margin: 5px;
+  }
+  
+  .articulo img {
+  width: 100%;
+  border-radius: 15px;
+  transition: transform 0.3s;
+  }
+  
+  .articulo p {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2rem;
+  }
+  
+  .articulo:hover img {
+  transform: scale(1.1);
+  }
+  
+  .articulo:hover {
+  transform: translateY(-12px);
+  }
+  
+  .titulo-temas {
+  font-size: 34px;
+  font-weight: bold;
+  color: #2e0a4e;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  }
+  
+  .titulo-temas::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background-color: #2e0a4e;
+  border-radius: 50px;
+  }
+  
+  section {
+  text-align: center;
+  margin-bottom: 60px;
+  }
+  
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+  
+  body {
+  font-family: 'Arial', sans-serif;
+  background-color: #eedfff;
+  color: #2c2b2c;
+  }
+  
+  header {
+  background-color: #2e0a4e;
+  padding: 70px;
+  position: relative; /* Asegura el posicionamiento absoluto del botón */
+}
+    
+    .logo {
+      position: absolute;
+      top: 10px; /* Ajusta la posición vertical del logo */
+      left: 5px; /* Ajusta la posición horizontal del logo para que se extienda a lo ancho */
+      width: 450px; /* Ajusta el ancho del logo para que se extienda a lo ancho */
+      height: 120px; /* Mantén la altura del logo */
+      object-fit: cover; /* Ajusta la imagen para que se adapte al tamaño del logo */
+    }
+  
+  
+  header h1 {
+  color: white;
+  font-size: 2.5rem;
+  }
+
+h1 {
+  color: rgb(18, 3, 52);
+  font-size: 1.9rem;
+}
+
+  h3 {
+    color: rgb(7, 3, 16);
+    font-size: 1.2rem;
+    }
+    
+
+  .button-container {
+      display: flex;
+      width: 500px;
+      height: 60px;
+      align-items: center;
+      justify-content: space-around;
+      border-radius: 40px;
+            position: absolute; /* Agrega esto */
+            top: 20px; /* Agrega esto */
+            right: 20px; /* Agrega esto */
+    }
+
+
+
+    .button {
+      top:10px;
+      bottom: 10px;
+      outline: 0 !important;
+      border: 0 !important;
+      width: 50px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transition: all ease-in-out 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    
+    .button:hover {
+      transform: translateY(-5.5px);
+    }
+    
+    .icon {
+      font-size: 30px;
+    }
+
+
+  main {
+  padding: 40px 20px;
+  }
+  
+
+
+  .button {
+    text-decoration: none;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    padding-block: 1.8rem;
+    padding-inline: 8rem;
+    background-color: #2e0a4e;
+    border-radius: 9999px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffff;
+    gap: 10px;
+    font-weight: bold;
+    border: 3px solid #7f0ac84d;
+    outline: none;
+    overflow: hidden;
+    font-size: 14px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .icon {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .button:hover {
+    transform: scale(1.05);
+    border-color: #fff9;
+  }
+  
+  .button:hover .icon {
+    transform: translate(4px);
+  }
+  
+  .button:hover::before {
+    animation: shine 1.5s ease-out infinite;
+  }
+  
+  .button::before {
+    content: "";
+    position: absolute;
+    width: 100px;
+    height: 100%;
+    background-image: linear-gradient(
+      120deg,
+      rgba(255, 255, 255, 0) 30%,
+      rgba(255, 255, 255, 0.8),
+      rgba(255, 255, 255, 0) 70%
+    );
+    top: 0;
+    left: -100px;
+    opacity: 0.6;
+  }
+  
+  @keyframes shine {
+    0% {
+      left: -100px;
+    }
+  
+    60% {
+      left: 100%;
+    }
+  
+    to {
+      left: 100%;
+    }
+  }
+
+  footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #2e0a4e;
+  color: white;
+  }
+
+  .boton-redondo {
+  margin-left: 15px;
+  border: none;
+  background: #4CAF50;
+  color: white;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background 0.2s;
+}
+.boton-redondo:hover {
+  background: #388e3c;
+}
+.boton-arriba-derecha {
+  position: absolute;
+  top: 24px;
+  right: 32px;
+  border: none;
+  background: transparent; /* Sin color de fondo */
+  border-radius: 16px;
+  width: 85px;   /* Más grande */
+  height: 85px;  /* Más grande */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform 0.18s;
+  z-index: 10;
+  padding: 0;
+}
+
+.boton-arriba-derecha:hover {
+  background: transparent; /* No cambia el fondo al hacer hover */
+  transform: scale(1.10);  /* Efecto de agrandar suave */
+}
+
+.img-boton {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 14px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+}
+#principal {
+  position: relative;
+}
+
+/* Modal estilos mejorados */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  /* Fondo morado aún más suave */
+  background: linear-gradient(120deg, #2e0a4e44 0%, #7f0ac822 100%);
+  backdrop-filter: blur(3px);
+  transition: background 0.3s;
+}
+
+.modal-content {
+  background: #fff;
+  margin: 3% auto;
+  padding: 36px 36px 28px 36px;
+  border-radius: 24px;
+  width: 98%;              /* Más largo hacia los lados */
+  max-width: 1100px;       /* Permite mayor ancho en pantallas grandes */
+  min-width: 320px;
+  box-shadow: 0 8px 32px rgba(46,10,78,0.22), 0 2px 12px rgba(127,10,200,0.10);
+  position: relative;
+  animation: modalFadeIn 0.5s cubic-bezier(.68,-0.55,.27,1.55);
+  border: 3px solid #7f0ac8;
+  overflow-y: auto;
+  max-height: 85vh;
+}
+
+@keyframes modalFadeIn {
+  from { transform: translateY(-60px) scale(0.95); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.close {
+  color: #7f0ac8;
+  position: absolute;
+  top: 18px;
+  right: 24px;
+  font-size: 38px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s, transform 0.2s;
+  z-index: 10;
+  background: #f3f3f3;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #2e0a4e22;
+  box-shadow: 0 2px 8px #2e0a4e11;
+}
+
+.close:hover {
+  color: #fff;
+  background: #7f0ac8;
+  transform: scale(1.15) rotate(90deg);
+  border-color: #2e0a4e;
+}
+
+.manual-content {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  color: #2e0a4e;
+  font-size: 1.07rem;
+  line-height: 1.7;
+  padding-top: 10px;
+}
+
+.manual-content h2 {
+  color: #2e0a4e;
+  text-align: center;
+  margin-top: 0;
+  padding-bottom: 12px;
+  border-bottom: 2px solid #7f0ac8;
+  font-size: 2rem;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #7f0ac8 0%, #2e0a4e 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.manual-content h3 {
+  color: #7f0ac8;
+  border-bottom: 1.5px solid #2e0a4e;
+  padding-bottom: 5px;
+  margin-top: 28px;
+  margin-bottom: 10px;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.manual-content h3::before {
+  content: "\f02d";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  color: #2e0a4e;
+  font-size: 1.1em;
+}
+
+.manual-content ul {
+  list-style: disc inside;
+  margin-left: 22px;
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #222;
+  padding-bottom: 8px;
+}
+
+.manual-content ul li {
+  margin-bottom: 8px;
+  padding-left: 2px;
+  position: relative;
+}
+
+.manual-content ol {
+  list-style: decimal inside;
+  margin-left: 22px;
+  line-height: 1.7;
+  font-size: 1rem;
+  color: #222;
+  padding-bottom: 8px;
+}
+
+.manual-content ol li {
+  margin-bottom: 8px;
+  padding-left: 2px;
+  position: relative;
+}
+
+/* Quitar iconos y color especial de los números */
+.manual-content ul li::before,
+.manual-content ol li::before {
+  content: "";
+  display: none;
+}
+
+.manual-content ol li:before {
+  display: none !important;
+}
+
+@media (max-width: 700px) {
+  .modal-content {
+    padding: 16px 2vw 14px 2vw;
+    max-width: 98vw;
+  }
+  .close {
+    top: 10px;
+    right: 12px;
+    font-size: 28px;
+    width: 36px;
+    height: 36px;
+  }
+  .manual-content h2 {
+    font-size: 1.2rem;
+  }
+}

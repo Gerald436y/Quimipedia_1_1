@@ -1,0 +1,165 @@
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f7f3e9; 
+  color: #333; 
+  padding: 0;
+}
+
+
+header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #2e0a4e;
+  padding: 28px;
+  color: rgb(255, 255, 255);
+  border-radius: 2px;
+}
+
+  
+  .logo {
+    position: absolute;
+    top: 10px;
+    left: 0px;
+    width: 420px;
+    height: 105px;
+    object-fit: cover;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    padding-right: 5px;
+  }
+  
+  .cards .red {
+    background-color: #3d0072;
+  }
+  
+  .cards .blue {
+    background-color: #3d0072;
+  }
+  
+  .cards .green {
+    background-color: #3d0072;
+  }
+  
+  .cards .card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    height: 50px;
+    width: 200px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: 550ms;
+  }
+  
+  .cards .card p.tip {
+    font-size: 1em;
+    font-weight: 700;
+    text-decoration: none; /* Agrega esta línea */
+  }
+  
+  .cards .card p.second-text {
+    font-size: .7em;
+    text-decoration: none; /* Agrega esta línea */
+  }
+  
+  .cards .card:hover {
+    transform: scale(1.2, 1.2);
+  }
+  
+  .cards:hover > .card:not(:hover) {
+    filter: blur(3px);
+    transform: scale(0.9, 0.9);
+  }
+  .cards .card a {
+    text-decoration: none;
+  }
+
+
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+
+
+h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+
+body {
+  margin-top: 80px;
+}
+
+
+main {
+  display: flex;
+  max-width: 1000px;
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#articulo {
+  flex: 2;
+  padding-right: 20px;
+}
+
+
+
+aside {
+  flex: 1;
+  background: #2e0a4e;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+aside h3 {
+  color: #2e0a4e; 
+}
+
+aside ul {
+  list-style: none;
+  padding: 0;
+}
+
+aside ul li {
+  margin-bottom: 10px;
+}
+
+aside ul li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+aside ul li a:hover {
+  color: #250e42;
+}
+
+/* Pie de página */
+footer {
+  text-align: center;
+  background: #2e0a4e;
+  color: #ffffff;
+  padding: 10px;
+  margin-top: 20px;
+}

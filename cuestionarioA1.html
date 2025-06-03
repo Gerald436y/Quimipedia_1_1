@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Teoría atómica de Bohr</title>
+    <link rel="stylesheet" href="styleCuestionario.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+        <nav>
+            <ul>
+                <div class="cards">
+                    <a href="index.html" class="card red">
+                        <p class="tip">Inicio</p>
+                    </a>
+
+                    <a href="verdaderoofalsoA1.html" class="card blue">
+                        <p class="tip">Verdadero o Falso</p>
+                    </a>
+
+                    <a href="articulo1.html" class="card green">
+                        <p class="tip"> Artículo</p>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="barra-superior">
+        <div class="temporizador" id="temporizador">Tiempo restante: 02:30</div>
+        <div class="intentos-restantes" id="intentosRestantes">Intentos restantes: 3</div>
+    </div>
+
+    <main>
+        <h2> Cuestionario de la teoría atómica de Bohr</h2>
+
+        <form id="quiz-form">
+            <div id="preguntas-container"></div>
+            <div class="botones">
+                <button type="button" onclick="calcularResultado()">Enviar respuestas</button>
+                <button type="button" id="btnReiniciar" onclick="reiniciarCuestionario()">Reiniciar cuestionario</button>
+            </div>
+        </form>
+
+        <div id="resultado"></div>
+        <div id="trophy">
+            <img src="IMG/trophy-6387_256.gif" alt="Copa de Premio">
+            <p>¡Felicidades! Has respondido todas las preguntas correctamente.</p>
+        </div>
+    </main>
+
+    <script>
+        const preguntas = [
+        {
+                id: 1,
+                pregunta: "¿Qué científico propuso el modelo atómico que explica los niveles de energía de los electrones?",
+                opciones: [
+                    { texto: "Ernest Rutherford", valor: "Rutherford" },
+                    { texto: "Albert Einstein", valor: "Einstein" },
+                    { texto: "Niels Bohr", valor: "Bohr" }
+                ],
+                respuestaCorrecta: "Bohr"
+            },
+            {
+                id: 2,
+                pregunta: " ¿En qué año Niels Bohr propuso su modelo atómico?",
+                opciones: [
+                    { texto: "1905", valor: "1905" },
+                    { texto: "1927", valor: "1927" },
+                    { texto: "1913 ", valor: "1913 " }
+                ],
+                respuestaCorrecta: "1913 "
+            },
+            {
+                id: 3,
+                pregunta: "¿Qué átomo sirvió de base para el modelo de Bohr?",
+                opciones: [
+                    { texto: " Carbono", valor: " Carbono" },
+                    { texto: "Hidrógeno", valor: "Hidrógeno" },
+                    { texto: "Oxígeno", valor: "Oxígeno" }
+                ],
+                respuestaCorrecta: "Hidrógeno"
+            },
+            {
+                id: 4,
+                pregunta: "Según Bohr, los electrones se mueven en:",
+                opciones: [
+                    { texto: "Órbitas circulares", valor: "Órbitas circulares" },
+                    { texto: "Trayectorias aleatorias", valor: "Trayectorias aleatorias" },
+                    { texto: "Espirales", valor: " Espirales" }
+                ],
+                respuestaCorrecta: "Órbitas circulares"
+            },
+            {
+                id: 5,
+                pregunta: "¿Qué postula el primer postulado de Bohr?",
+                opciones: [
+                    { texto: "Los electrones emiten energía constantemente", valor: "Los electrones emiten energía constantemente" },
+                    { texto: "Los electrones giran en órbitas estacionarias sin emitir energía", valor: "Los electrones giran en órbitas estacionarias sin emitir energía" },
+                    { texto: "Los electrones se mueven en espiral hacia el núcleo", valor: "Los electrones se mueven en espiral hacia el núcleo" }
+                ],
+                respuestaCorrecta: " Los electrones giran en órbitas estacionarias sin emitir energía"
+            },
+            {
+                id: 6,
+                pregunta: "¿Qué ocurre cuando un electrón salta de una órbita superior a una inferior?",
+                opciones: [
+                    { texto: "Absorbe energía", valor: "Absorbe energía" },
+                    { texto: "Emite energía en forma de fotón", valor: "Emite energía en forma de fotón" },
+                    { texto: "Se desintegra", valor: "Se desintegra" }
+                ],
+                respuestaCorrecta: "Emite energía en forma de fotón"
+            },
+            {
+                id: 7,
+                pregunta: "¿Qué ocurre cuando un electrón absorbe energía?",
+                opciones: [
+                    { texto: "Salta a una órbita de mayor energía ", valor: "Salta a una órbita de mayor energía" },
+                    { texto: " Salta a una órbita de menor energía", valor: "Salta a una órbita de menor energía" },
+                    { texto: "Permanece en la misma órbita ", valor: "Permanece en la misma órbita" }
+                ],
+                respuestaCorrecta: "Salta a una órbita de mayor energía "
+            },
+            {
+    id: 8,
+    pregunta: "¿Qué es un cuanto de energía en el modelo de Bohr?",
+    opciones: [
+        { texto: "La energía mínima que puede ganar o perder un electrón", valor: "minima" },
+        { texto: "La energía máxima de un átomo", valor: "maxima" },
+        { texto: "La energía cinética de un electrón", valor: "cinetica" }
+    ],
+    respuestaCorrecta: "minima"
+},
+{
+    id: 9,
+    pregunta: "¿Qué limitación tiene el modelo de Bohr?",
+    opciones: [
+        { texto: "Solo explica átomos con un electrón", valor: "un-electron" },
+        { texto: "No explica la estructura del núcleo", valor: "nucleo" },
+        { texto: "No considera la gravedad", valor: "gravedad" }
+    ],
+    respuestaCorrecta: "un-electron"
+},
+{
+    id: 10,
+    pregunta: "¿Qué es el estado fundamental de un átomo?",
+    opciones: [
+        { texto: "Cuando los electrones están en la órbita de menor energía", valor: "menor-energia" },
+        { texto: "Cuando los electrones están en la órbita de mayor energía", valor: "mayor-energia" },
+        { texto: "Cuando el átomo se ioniza", valor: "ionizacion" }
+    ],
+    respuestaCorrecta: "menor-energia"
+},
+{
+    id: 11,
+    pregunta: "¿Qué es un estado excitado en el modelo de Bohr?",
+    opciones: [
+        { texto: "Cuando los electrones están en órbitas de mayor energía", valor: "mayor-energia" },
+        { texto: "Cuando el átomo pierde electrones", valor: "perdida-electron" },
+        { texto: "Cuando el núcleo se desintegra", valor: "desintegracion" }
+    ],
+    respuestaCorrecta: "mayor-energia"
+},
+{
+    id: 12,
+    pregunta: "¿Qué partícula del átomo no es considerada en el modelo de Bohr?",
+    opciones: [
+        { texto: "Protón", valor: "proton" },
+        { texto: "Neutrón", valor: "neutron" },
+        { texto: "Electrón", valor: "electron" }
+    ],
+    respuestaCorrecta: "neutron"
+},
+{
+    id: 13,
+    pregunta: "¿Qué fenómeno explica el modelo de Bohr?",
+    opciones: [
+        { texto: "El espectro de emisión del hidrógeno", valor: "espectro-emision" },
+        { texto: "La radiactividad", valor: "radiactividad" },
+        { texto: "La formación de moléculas", valor: "formacion-moleculas" }
+    ],
+    respuestaCorrecta: "espectro-emision"
+},
+{
+    id: 14,
+    pregunta: "¿Qué es una órbita estacionaria en el modelo de Bohr?",
+    opciones: [
+        { texto: "Una órbita donde el electrón no emite energía", valor: "no-emite-energia" },
+        { texto: "Una órbita donde el electrón se detiene", valor: "electron-detiene" },
+        { texto: "Una órbita elíptica", valor: "orbita-eliptica" }
+    ],
+    respuestaCorrecta: "no-emite-energia"
+},
+{
+    id: 15,
+    pregunta: "¿Qué ley física inspiró a Bohr para su modelo?",
+    opciones: [
+        { texto: "La ley de gravitación universal", valor: "gravitacion" },
+        { texto: "La ley de Coulomb", valor: "coulomb" },
+        { texto: "La cuantización de la energía de Planck", valor: "planck" }
+    ],
+    respuestaCorrecta: "planck"
+},
+{
+    id: 16,
+    pregunta: "¿Qué es el número cuántico principal en el modelo de Bohr?",
+    opciones: [
+        { texto: "El número que indica el nivel de energía de un electrón", valor: "nivel-energia" },
+        { texto: "El número de protones en el núcleo", valor: "protones" },
+        { texto: "El número de neutrones en el núcleo", valor: "neutrones" }
+    ],
+    respuestaCorrecta: "nivel-energia"
+},
+{
+    id: 17,
+    pregunta: "¿Qué predice el modelo de Bohr sobre la energía de los electrones?",
+    opciones: [
+        { texto: "La energía está cuantizada", valor: "cuantizada" },
+        { texto: "La energía es continua", valor: "continua" },
+        { texto: "La energía depende de la temperatura", valor: "temperatura" }
+    ],
+    respuestaCorrecta: "cuantizada"
+},
+{
+    id: 18,
+    pregunta: "¿Qué ocurre cuando un electrón cae a una órbita inferior?",
+    opciones: [
+        { texto: "Emite un fotón con energía específica", valor: "emite-foton" },
+        { texto: "Absorbe un fotón", valor: "absorbe-foton" },
+        { texto: "Se convierte en un protón", valor: "convierte-proton" }
+    ],
+    respuestaCorrecta: "emite-foton"
+},
+{
+    id: 19,
+    pregunta: "¿Qué tipo de espectro produce el hidrógeno según el modelo de Bohr?",
+    opciones: [
+        { texto: "Espectro de líneas", valor: "lineas" },
+        { texto: "Espectro continuo", valor: "continuo" },
+        { texto: "Espectro de bandas", valor: "bandas" }
+    ],
+    respuestaCorrecta: "lineas"
+},
+{
+    id: 20,
+    pregunta: "¿Qué postula el segundo postulado de Bohr?",
+    opciones: [
+        { texto: "Los electrones solo pueden tener ciertos niveles de energía", valor: "niveles-energia" },
+        { texto: "Los electrones se mueven libremente", valor: "libremente" },
+        { texto: "Los electrones emiten energía constantemente", valor: "emiten-energia" }
+    ],
+    respuestaCorrecta: "niveles-energia"
+},
+{
+    id: 21,
+    pregunta: "¿Qué es la serie de Lyman en el espectro del hidrógeno?",
+    opciones: [
+        { texto: "Transiciones electrónicas al nivel n=1", valor: "nivel-1" },
+        { texto: "Transiciones electrónicas al nivel n=2", valor: "nivel-2" },
+        { texto: "Transiciones electrónicas al nivel n=3", valor: "nivel-3" }
+    ],
+    respuestaCorrecta: "nivel-1"
+},
+{
+    id: 22,
+    pregunta: "¿Qué es la serie de Balmer en el espectro del hidrógeno?",
+    opciones: [
+        { texto: "Transiciones electrónicas al nivel n=2", valor: "nivel-2" },
+        { texto: "Transiciones electrónicas al nivel n=1", valor: "nivel-1" },
+        { texto: "Transiciones electrónicas al nivel n=3", valor: "nivel-3" }
+    ],
+    respuestaCorrecta: "nivel-2"
+},
+{
+    id: 23,
+    pregunta: "¿Qué es la constante de Rydberg?",
+    opciones: [
+        { texto: "Una constante relacionada con los niveles de energía del hidrógeno", valor: "niveles-energia" },
+        { texto: "Una constante relacionada con la gravedad", valor: "gravedad" },
+        { texto: "Una constante relacionada con la velocidad de la luz", valor: "luz" }
+    ],
+    respuestaCorrecta: "niveles-energia"
+},
+{
+    id: 24,
+    pregunta: "¿Qué predice el modelo de Bohr sobre el momento angular del electrón?",
+    opciones: [
+        { texto: "Está cuantizado", valor: "cuantizado" },
+        { texto: "Es constante", valor: "constante" },
+        { texto: "Depende de la temperatura", valor: "temperatura" }
+    ],
+    respuestaCorrecta: "cuantizado"
+},
+{
+    id: 25,
+    pregunta: "¿Qué es el radio de Bohr?",
+    opciones: [
+        { texto: "El radio de la órbita más pequeña en el modelo de Bohr", valor: "orbita-pequena" },
+        { texto: "El radio del núcleo atómico", valor: "nucleo" },
+        { texto: "El radio de un electrón", valor: "electron" }
+    ],
+    respuestaCorrecta: "orbita-pequena"
+},
+{
+    id: 26,
+    pregunta: "¿Qué crítica principal se le hace al modelo de Bohr?",
+    opciones: [
+        { texto: "No explica átomos con múltiples electrones", valor: "multiples-electrones" },
+        { texto: "No explica la existencia del núcleo", valor: "nucleo" },
+        { texto: "No explica la gravedad", valor: "gravedad" }
+    ],
+    respuestaCorrecta: "multiples-electrones"
+},
+{
+    id: 27,
+    pregunta: "¿Qué modelo reemplazó al de Bohr?",
+    opciones: [
+        { texto: "Modelo cuántico", valor: "cuantico" },
+        { texto: "Modelo de Dalton", valor: "dalton" },
+        { texto: "Modelo de Thomson", valor: "thomson" }
+    ],
+    respuestaCorrecta: "cuantico"
+},
+{
+    id: 28,
+    pregunta: "¿Qué fenómeno no puede explicar el modelo de Bohr?",
+    opciones: [
+        { texto: "El efecto fotoeléctrico", valor: "fotoelectrico" },
+        { texto: "Los espectros de átomos complejos", valor: "espectros-complejos" },
+        { texto: "La emisión de fotones", valor: "emision-fotones" }
+    ],
+    respuestaCorrecta: "espectros-complejos"
+},
+{
+    id: 29,
+    pregunta: "¿Qué es la energía de ionización en el modelo de Bohr?",
+    opciones: [
+        { texto: "La energía necesaria para arrancar un electrón", valor: "arrancar-electron" },
+        { texto: "La energía liberada por un electrón", valor: "liberada-electron" },
+        { texto: "La energía de un fotón", valor: "energia-foton" }
+    ],
+    respuestaCorrecta: "arrancar-electron"
+},
+{
+    id: 30,
+    pregunta: "¿Qué relación tiene el modelo de Bohr con la mecánica cuántica?",
+    opciones: [
+        { texto: "Fue un precursor de la mecánica cuántica", valor: "precursor" },
+        { texto: "Es incompatible con la mecánica cuántica", valor: "incompatible" },
+        { texto: "No tiene relación", valor: "sin-relacion" }
+    ],
+    respuestaCorrecta: "precursor"
+}
+        ];
+
+     let preguntasSeleccionadas = [];
+    let tiempoRestante = 150; 
+    let intervalo;
+    let reiniciosRealizados = 0;
+
+    function iniciarTemporizador() {
+        // Limpiar intervalo previo SIEMPRE
+        clearInterval(intervalo);
+        
+        intervalo = setInterval(() => {
+            tiempoRestante--;
+            actualizarTemporizador();
+            if (tiempoRestante <= 0) {
+                clearInterval(intervalo);
+                calcularResultado();
+                alert("¡Tiempo agotado! Se han enviado tus respuestas.");
+            }
+        }, 1000);
+    }
+
+    function actualizarTemporizador() {
+        const minutos = Math.floor(tiempoRestante / 60);
+        const segundos = tiempoRestante % 60;
+        document.getElementById("temporizador").textContent = `Tiempo restante: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    }
+
+    function seleccionarPreguntasAleatorias() {
+        preguntasSeleccionadas = preguntas.sort(() => Math.random() - 0.5).slice(0, 10);
+    }
+
+     function mostrarPreguntas() {
+        const contenedor = document.getElementById("preguntas-container");
+        contenedor.innerHTML = "";
+
+        preguntasSeleccionadas.forEach((pregunta, index) => {
+            const numPregunta = index + 1;
+            const divPregunta = document.createElement("div");
+            divPregunta.classList.add("question");
+
+            const textoPregunta = document.createElement("p");
+            textoPregunta.textContent = `${numPregunta}. ${pregunta.pregunta}`;
+            divPregunta.appendChild(textoPregunta);
+
+            pregunta.opciones.forEach(opcion => {
+                const label = document.createElement("label");
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = `q${numPregunta}`;
+                input.value = opcion.valor;
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(` ${opcion.texto}`));
+                divPregunta.appendChild(label);
+            });
+
+            const feedback = document.createElement("p");
+            feedback.classList.add("feedback");
+            feedback.id = `feedback-q${numPregunta}`;
+            divPregunta.appendChild(feedback);
+
+            contenedor.appendChild(divPregunta);
+        });
+    }
+
+    function calcularResultado() {
+        let puntaje = 0;
+        preguntasSeleccionadas.forEach((pregunta, index) => {
+            const numPregunta = index + 1;
+            const seleccion = document.querySelector(`input[name="q${numPregunta}"]:checked`);
+            const feedbackElement = document.getElementById(`feedback-q${numPregunta}`);
+
+            if (seleccion && seleccion.value === pregunta.respuestaCorrecta) {
+                puntaje++;
+                feedbackElement.textContent = "¡Correcto!";
+                feedbackElement.style.color = "green";
+            } else {
+                feedbackElement.textContent = `Incorrecto. La respuesta correcta es: ${pregunta.respuestaCorrecta}`;
+                feedbackElement.style.color = "red";
+            }
+        });
+
+        const resultadoElement = document.getElementById("resultado");
+        resultadoElement.innerHTML = `Tu puntaje es: ${puntaje} de ${preguntasSeleccionadas.length}`;
+
+        if (puntaje === preguntasSeleccionadas.length) {
+            document.getElementById("trophy").style.display = "block";
+        } else {
+            document.getElementById("trophy").style.display = "none";
+        }
+
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.disabled = true;
+        });
+
+        const botonEnviar = document.querySelector('button[onclick="calcularResultado()"]');
+        botonEnviar.disabled = true;
+    }
+
+    function reiniciarCuestionario() {
+        // Incrementar contador de reinicios ANTES de verificar
+        reiniciosRealizados++;
+
+        // Verificar si es el último intento (2 reinicios + carga inicial = 3)
+        if (reiniciosRealizados >= 2) {
+            bloquearBotonReinicio();
+        }
+
+        // Reiniciar componentes del cuestionario
+        seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+        document.getElementById("resultado").innerHTML = "";
+        document.getElementById("trophy").style.display = "none";
+
+        // REINICIAR TEMPORIZADOR (corrección clave)
+        tiempoRestante = 150;
+        actualizarTemporizador();
+        iniciarTemporizador();
+
+        // Restablecer controles
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+            radio.disabled = false;
+        });
+
+        const botonEnviar = document.querySelector('button[onclick="calcularResultado()"]');
+        if (botonEnviar) botonEnviar.disabled = false;
+
+        actualizarIntentosRestantes();
+    }
+
+    function bloquearBotonReinicio() {
+        const botonReiniciar = document.getElementById('btnReiniciar');
+        botonReiniciar.disabled = true;
+        botonReiniciar.style.backgroundColor = "#bbb";
+        botonReiniciar.style.color = "#666";
+        botonReiniciar.style.cursor = "not-allowed";
+        botonReiniciar.textContent = "Reinicio bloqueado";
+    }
+
+    function actualizarIntentosRestantes() {
+        // Ajustado: 3 intentos totales (1 inicial + 2 reinicios)
+        const intentosRestantes = 2 - reiniciosRealizados; 
+        const intentosDiv = document.getElementById("intentosRestantes");
+        
+        if (intentosDiv) {
+            intentosDiv.textContent = `Intentos restantes: ${intentosRestantes}`;
+            intentosDiv.classList.toggle("cero", intentosRestantes === 0);
+        }
+    }
+
+    window.onload = function() {
+        // Inicialización cuenta como primer intento
+        seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+        actualizarTemporizador();
+        iniciarTemporizador();
+        actualizarIntentosRestantes(); // Mostrará 2 intentos restantes
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>QuimiPedia</title>
+  <link rel="stylesheet" href="styleInicio.css">
+</head>
+
+<body>
+
+  <header>
+    <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+    <button class="boton-arriba-derecha" title="Nuevo botón">
+      <img src="IMG/LogoManual.jpg" alt="Botón Imagen" class="img-boton">
+    </button>
+  </header>
+
+  <main>
+    <section id="principal">
+      <h2 class="titulo-temas">
+        Temas de Química
+      </h2>
+
+      <div class="articulos-container">
+        <a href="articulo1.html" class="articulo">
+          <img src="IMG/images.gif" 
+          alt="Bohr" style="width: 230px; height: 185px;">
+          <p>Teoria atómica de Bohr</p>
+        </a>
+
+        <a href="articulo2.html" class="articulo">
+          <img src="https://i.pinimg.com/originals/07/aa/1a/07aa1ab70e52504650e4a4f3f922ce29.gif" alt="El atómo y sus partículas subatómicas 
+          alt="AtomosyParticulas" style="width: 230px; height: 185px;">
+          <p>El atómo y sus partículas subatómicas</p>
+        </a>
+
+        <a href="articulo3.html" class="articulo">
+          <img src="IMG/elementos.gif" alt="Base experimental de la teoría cuántica"
+          style="width: 230px; height: 185px;">
+          <p>Base experimental de la teoría cuántica</p>
+        </a>
+
+        <a href="articulo4.html" class="articulo">
+          <img src="https://cdn.dribbble.com/userupload/22674647/file/original-b2be12405d589b6929891ed1bc64cab2.gif" alt="Teoría cuántica" style="width: 230px; height: 185px;">
+          <p>Física cuántica</p>
+        </a>
+
+        <a href="articulo5.html" class="articulo">
+          <img src="https://i.pinimg.com/originals/96/ff/61/96ff61e906c5557f8e1fb3e6c6271d0a.gif" alt="Distribución electrónica en 
+          sistemas polielectrónicos" style="width: 230px; height: 185px;">
+          <p>Configuración Electrónica</p>
+        </a>
+
+        <a href="articulo6.html" class="articulo">
+          <img src="https://i.pinimg.com/originals/b5/98/d6/b598d6aa8beaf4f32262fcaab7d25317.gif" 
+          alt="Aplicaciones tecnológicos de la emisión electrónica de los átomos" style="width: 230px; height: 185px;">
+          <p>Aplicaciones tecnológicas en emisiones de átomos</p>
+        </a>
+
+      </div>
+    </section>
+    
+    <section id="quizzes">
+      <h1>Simulador de Decisiones</h1>
+      <br class="salto-de-linea">
+    
+      <h3>¿Ya leíste todos los artículos y no sabes que cuestionario o actividad elegir?</h3>
+
+      <h3> ¡No te preocupes, toca un botón de los dos para ir a un cuestionario o actividad aleatoria!.</h3>
+      <br class="salto-de-linea">
+    
+      <button class="button" id="iniciar-simulador">
+        Cuestionario Aleatorio
+        <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+          <path
+            clip-rule="evenodd"
+            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 
+              2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+            fill-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+      <br class="salto-de-linea">
+
+      <button class="button" id="actividad-aleatoria">
+        Actividad Aleatoria
+        <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+          <path
+            clip-rule="evenodd"
+            d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 
+              2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+            fill-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+    </section>
+    
+    <script>
+
+const botón = document.getElementById("iniciar-simulador");
+const botónActividad = document.getElementById("actividad-aleatoria");
+
+const opciones = [
+  "cuestionarioA1.html",
+  "cuestionarioA2.html",
+  "cuestionarioA3.html",
+  "cuestionarioA4.html",
+  "cuestionarioA5.html",
+  "cuestionarioA6.html"
+];
+
+const opcionesActividad = [
+  "DragAndDropA2.html",
+  "DragAndDropA4.html",
+  "verdaderoofalsoA1.html",
+  "verdaderoofalsoA3.html",
+  "completarFraseA5.html",
+  "completarFraseA6.html"
+];
+
+botón.addEventListener("click", () => {
+  const opciónAleatoria = opciones[Math.floor(Math.random() * opciones.length)];
+  window.location.href = opciónAleatoria;
+});
+
+botónActividad.addEventListener("click", () => {
+  const opciónAleatoria = opcionesActividad[Math.floor(Math.random() * opcionesActividad.length)];
+  window.location.href = opciónAleatoria;
+});
+
+  // Abrir el modal al hacer clic en el botón del header
+  document.querySelector('.boton-arriba-derecha').onclick = function() {
+    const content = document.getElementById('manualContent');
+    content.innerHTML = `
+    <div class="manual-content">
+      <h2>Manual de Usuario</h2>
+      <h3>Resumen</h3>
+      <p>
+        Con <strong>QuimiTabla</strong> puedes seleccionar cualquier elemento y obtener información detallada al instante, desde su peso atómico hasta su configuración electrónica. Clasifica los elementos por tipo, estado o propiedades para un estudio más eficiente.
+      </p>
+      <ul>
+        <li><strong>Modo Enlaces Químicos:</strong> Crea enlaces simples o múltiples entre elementos y visualiza su estructura de Lewis junto con el tipo de enlace formado.</li>
+        <li><strong>Calculadora Estequiométrica:</strong> Realiza cálculos precisos como gramos a moles, reactivo limitante, rendimiento porcentual y más, todo en un solo lugar.</li>
+      </ul>
+      <p>
+        <strong>¡Simplifica tu aprendizaje y experimentación en química con QuimiTabla! Descárgala ahora y domina la química como nunca antes.</strong>
+      </p>
+
+      <hr style="margin: 24px 0; border: none; border-top: 2px solid #7f0ac8;">
+
+      <h3>Requisitos del Sistema</h3>
+      <ul>
+        <li>Sistema Operativo: Windows 7, 8, 10 o superior.</li>
+        <li>Software requerido: Java jdk 23 o superior.</li>
+        <li>Procesador: Intel Celeron N4020 o superior.</li>
+        <li>Memoria RAM: 2GB o superior.</li>
+        <li>Espacio en disco: 200 MB libres.</li>
+      </ul>
+
+      <h3>Instalación y Ejecución</h3>
+      <ol>
+        <li>Descargar el archivo ejecutable <strong>TablaPeriodica.exe</strong></li>
+        <li>Hacer doble clic en el archivo .exe para iniciar la instalación</li>
+        <li>Seguir las instrucciones del instalador para completar la configuración</li>
+        <li>Una vez instalado, abrir la aplicación desde el acceso directo en el escritorio o el menú de inicio</li>
+      </ol>
+    </div>
+    `;
+    document.getElementById('manualModal').style.display = 'block';
+  };
+
+  // Cerrar el modal al hacer clic en la X
+  function closeModal() {
+    document.getElementById('manualModal').style.display = 'none';
+  }
+
+  // Cerrar el modal al hacer clic fuera del contenido
+  window.onclick = function(event) {
+    const modal = document.getElementById('manualModal');
+    if (event.target == modal) {
+      closeModal();
+    }
+  }
+    </script>
+
+    <!-- 
+    <section id="cuestionarios">
+      <h1>Cuestionario</h1>
+      <br class="salto-de-linea">
+
+      <h3>Prueba tus conocimientos con nuestro cuestionario de química básica.</h3>
+      <br class="salto-de-linea">
+
+      <a href="cuestionarios.html">
+        <button class="button">
+          Realizar Cuestionario
+          <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+            <path
+              clip-rule="evenodd"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+              fill-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </a>
+    </section>
+
+    
+    <section id="quizzes">
+      <h1>Simulador de Decisiones</h1>
+      <br class="salto-de-linea">
+
+      <h3>Aprende interactuando con nuestro simulador de decisiones el cual es un experimento 
+        breve       <br class="salto-de-linea">
+        sobre las combinaciones con elementos quimicos</h3>
+      <br class="salto-de-linea">
+
+      <a href="simulador.html">
+        <button class="button">
+          Iniciar Simulador
+          <svg fill="currentColor" viewBox="0 0 24 24" class="icon">
+            <path
+              clip-rule="evenodd"
+              d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25zm4.28 10.28a.75.75 0 000-1.06l-3-3a.75.75 0 10-1.06 1.06l1.72 1.72H8.25a.75.75 0 000 1.5h5.69l-1.72 1.72a.75.75 0 101.06 1.06l3-3z"
+              fill-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </a>
+    </section>
+ 
+-->
+
+<!-- Modal para mostrar información -->
+<div id="manualModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <div class="manual-content" id="manualContent"></div>
+  </div>
+</div>
+
+  </main>
+  <footer>
+    <p>&copy; 2025 QuimiPedia - Equipo de QuimiUnión </p>
+  </footer>
+</body>
+
+</html>

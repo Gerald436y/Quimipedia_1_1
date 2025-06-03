@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Teoría atómica de Bohr</title>
+    <link rel="stylesheet" href="styleCuestionario.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+        <nav>
+            <ul>
+                <div class="cards">
+                    <a href="index.html" class="card red">
+                        <p class="tip">Inicio</p>
+                    </a>
+
+                    <a href="completarFraseA6.html" class="card blue">
+                        <p class="tip">Completar Frase</p>
+                    </a>
+
+                    <a href="articulo6.html" class="card green">
+                        <p class="tip">Artículo</p>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="barra-superior">
+        <div class="temporizador" id="temporizador">Tiempo restante: 02:30</div>
+        <div class="intentos-restantes" id="intentosRestantes">Intentos restantes: 3</div>
+    </div>
+
+    <main>
+        <h2>Cuestionario de las Aplicaciones tecnológicas de la emisión electrónica</h2>
+
+        <form id="quiz-form">
+            <div id="preguntas-container"></div>
+            <div class="botones">
+                <button type="button" onclick="calcularResultado()">Enviar respuestas</button>
+                <button type="button" id="btnReiniciar" onclick="reiniciarCuestionario()">Reiniciar cuestionario</button>
+            </div>
+        </form>
+
+        <div id="resultado"></div>
+        <div id="trophy">
+            <img src="IMG/trophy-6387_256.gif" alt="Copa de Premio">
+            <p>¡Felicidades! Has respondido todas las preguntas correctamente.</p>
+        </div>
+    </main>
+
+    <script>
+        const preguntas = [
+        
+    {
+        id: 1,
+        pregunta: "¿Qué es la emisión electrónica de los átomos?",
+        opciones: [
+            { texto: "La liberación de protones desde el núcleo.", valor: "protones" },
+            { texto: "La liberación de electrones desde la capa externa de un átomo.", valor: "electrones" },
+            { texto: "La absorción de energía por parte de los electrones.", valor: "absorcion" },
+            { texto: "La formación de enlaces químicos.", valor: "enlaces" }
+        ],
+        respuestaCorrecta: "electrones"
+    },
+    {
+        id: 2,
+        pregunta: "¿En qué se basa el funcionamiento de los tubos de rayos catódicos?",
+        opciones: [
+            { texto: "Emisión de protones.", valor: "protones" },
+            { texto: "Emisión de electrones desde un cátodo caliente.", valor: "electrones" },
+            { texto: "Absorción de luz.", valor: "absorcion" },
+            { texto: "Emisión de neutrones.", valor: "neutrones" }
+        ],
+        respuestaCorrecta: "electrones"
+    },
+    {
+        id: 3,
+        pregunta: "¿Cuál de los siguientes dispositivos utiliza la emisión electrónica para generar imágenes?",
+        opciones: [
+            { texto: "Transistores.", valor: "transistores" },
+            { texto: "Tubos de rayos catódicos (CRT).", valor: "crt" },
+            { texto: "Paneles solares.", valor: "paneles" },
+            { texto: "Baterías de litio.", valor: "baterias" }
+        ],
+        respuestaCorrecta: "crt"
+    },
+    {
+        id: 4,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los microscopios electrónicos?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "campo"
+    },
+    {
+        id: 5,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de pantallas LED?",
+        opciones: [
+            { texto: "Generación de luz mediante la recombinación de electrones y huecos.", valor: "luz" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" },
+            { texto: "Absorción de electrones.", valor: "absorcion" },
+            { texto: "Generación de campos magnéticos.", valor: "magneticos" }
+        ],
+        respuestaCorrecta: "luz"
+    },
+    {
+        id: 6,
+        pregunta: "¿Qué fenómeno es esencial para el funcionamiento de los diodos emisores de luz (LED)?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Recombinación de electrones y huecos.", valor: "recombinacion" },
+            { texto: "Emisión de protones.", valor: "protones" }
+        ],
+        respuestaCorrecta: "recombinacion"
+    },
+    {
+        id: 7,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los cátodos de los tubos de vacío?",
+        opciones: [
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "termica"
+    },
+    {
+        id: 8,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la espectroscopía de masas?",
+        opciones: [
+            { texto: "Medición de la masa de iones.", valor: "masa" },
+            { texto: "Generación de imágenes.", valor: "imagenes" },
+            { texto: "Producción de energía.", valor: "energia" },
+            { texto: "Absorción de luz.", valor: "absorcion" }
+        ],
+        respuestaCorrecta: "masa"
+    },
+    {
+        id: 9,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los displays de plasma?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Ionización de gases.", valor: "ionizacion" }
+        ],
+        respuestaCorrecta: "ionizacion"
+    },
+    {
+        id: 10,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de semiconductores?",
+        opciones: [
+            { texto: "Generación de campos magnéticos.", valor: "magneticos" },
+            { texto: "Dopaje de materiales.", valor: "dopaje" },
+            { texto: "Absorción de luz.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "dopaje"
+    },
+    {
+        id: 11,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los fotomultiplicadores?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "secundaria"
+    },
+    {
+        id: 12,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de células fotovoltaicas?",
+        opciones: [
+            { texto: "Generación de electricidad a partir de la luz.", valor: "electricidad" },
+            { texto: "Absorción de electrones.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" },
+            { texto: "Generación de campos magnéticos.", valor: "magneticos" }
+        ],
+        respuestaCorrecta: "electricidad"
+    },
+    {
+        id: 13,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los microscopios de efecto túnel?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "campo"
+    },
+    {
+        id: 14,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de transistores?",
+        opciones: [
+            { texto: "Control del flujo de electrones.", valor: "flujo" },
+            { texto: "Generación de luz.", valor: "luz" },
+            { texto: "Absorción de energía térmica.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "flujo"
+    },
+    {
+        id: 15,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los tubos de rayos X?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "termica"
+    },
+    {
+        id: 16,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de sensores de imagen?",
+        opciones: [
+            { texto: "Captura de imágenes mediante la detección de fotones.", valor: "imagenes" },
+            { texto: "Generación de campos magnéticos.", valor: "magneticos" },
+            { texto: "Absorción de electrones.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "imagenes"
+    },
+    {
+        id: 17,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los aceleradores de partículas?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "campo"
+    },
+    {
+        id: 18,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de memorias flash?",
+        opciones: [
+            { texto: "Almacenamiento de datos mediante la captura de electrones.", valor: "datos" },
+            { texto: "Generación de luz.", valor: "luz" },
+            { texto: "Absorción de energía térmica.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "datos"
+    },
+    {
+        id: 19,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los displays OLED?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Recombinación de electrones y huecos.", valor: "recombinacion" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "recombinacion"
+    },
+    {
+        id: 20,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de láseres?",
+        opciones: [
+            { texto: "Emisión de luz coherente.", valor: "luz" },
+            { texto: "Absorción de electrones.", valor: "absorcion" },
+            { texto: "Generación de campos magnéticos.", valor: "magneticos" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "luz"
+    },
+    {
+        id: 21,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los detectores de partículas?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "secundaria"
+    },
+    {
+        id: 22,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de paneles táctiles?",
+        opciones: [
+            { texto: "Detección de toques mediante cambios en la conductividad.", valor: "toques" },
+            { texto: "Generación de luz.", valor: "luz" },
+            { texto: "Absorción de energía térmica.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "toques"
+    },
+    {
+        id: 23,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los tubos fluorescentes?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Ionización de gases.", valor: "ionizacion" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "ionizacion"
+    },
+    {
+        id: 24,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de sensores de temperatura?",
+        opciones: [
+            { texto: "Medición de la temperatura mediante la emisión térmica.", valor: "temperatura" },
+            { texto: "Generación de luz.", valor: "luz" },
+            { texto: "Absorción de electrones.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "temperatura"
+    },
+    {
+        id: 25,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los tubos de vacío?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "termica"
+    },
+    {
+        id: 26,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de sensores de humedad?",
+        opciones: [
+            { texto: "Medición de la humedad mediante cambios en la conductividad.", valor: "humedad" },
+            { texto: "Generación de luz.", valor: "luz" },
+            { texto: "Absorción de energía térmica.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "humedad"
+    },
+    {
+        id: 27,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los tubos de rayos catódicos (CRT)?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "termica"
+    },
+    {
+        id: 28,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de sensores de presión?",
+        opciones: [
+            { texto: "Medición de la presión mediante cambios en la conductividad.", valor: "presion" },
+            { texto: "Generación de luz.", valor: "luz" },
+            { texto: "Absorción de energía térmica.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "presion"
+    },
+    {
+        id: 29,
+        pregunta: "¿Qué tipo de emisión electrónica se utiliza en los tubos de rayos X?",
+        opciones: [
+            { texto: "Emisión térmica.", valor: "termica" },
+            { texto: "Emisión fotoeléctrica.", valor: "fotoelectrica" },
+            { texto: "Emisión por campo.", valor: "campo" },
+            { texto: "Emisión secundaria.", valor: "secundaria" }
+        ],
+        respuestaCorrecta: "termica"
+    },
+    {
+        id: 30,
+        pregunta: "¿Qué aplicación tiene la emisión electrónica en la fabricación de sensores de movimiento?",
+        opciones: [
+            { texto: "Detección de movimiento mediante cambios en la conductividad.", valor: "movimiento" },
+            { texto: "Generación de luz.", valor: "luz" },
+            { texto: "Absorción de energía térmica.", valor: "absorcion" },
+            { texto: "Emisión de rayos X.", valor: "rayosx" }
+        ],
+        respuestaCorrecta: "movimiento"
+    }
+];
+
+     let preguntasSeleccionadas = [];
+    let tiempoRestante = 150; 
+    let intervalo;
+    let reiniciosRealizados = 0;
+
+    function iniciarTemporizador() {
+        // Limpiar intervalo previo SIEMPRE
+        clearInterval(intervalo);
+        
+        intervalo = setInterval(() => {
+            tiempoRestante--;
+            actualizarTemporizador();
+            if (tiempoRestante <= 0) {
+                clearInterval(intervalo);
+                calcularResultado();
+                alert("¡Tiempo agotado! Se han enviado tus respuestas.");
+            }
+        }, 1000);
+    }
+
+    function actualizarTemporizador() {
+        const minutos = Math.floor(tiempoRestante / 60);
+        const segundos = tiempoRestante % 60;
+        document.getElementById("temporizador").textContent = `Tiempo restante: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    }
+
+    function seleccionarPreguntasAleatorias() {
+        preguntasSeleccionadas = preguntas.sort(() => Math.random() - 0.5).slice(0, 10);
+    }
+
+     function mostrarPreguntas() {
+        const contenedor = document.getElementById("preguntas-container");
+        contenedor.innerHTML = "";
+
+        preguntasSeleccionadas.forEach((pregunta, index) => {
+            const numPregunta = index + 1;
+            const divPregunta = document.createElement("div");
+            divPregunta.classList.add("question");
+
+            const textoPregunta = document.createElement("p");
+            textoPregunta.textContent = `${numPregunta}. ${pregunta.pregunta}`;
+            divPregunta.appendChild(textoPregunta);
+
+            pregunta.opciones.forEach(opcion => {
+                const label = document.createElement("label");
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = `q${numPregunta}`;
+                input.value = opcion.valor;
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(` ${opcion.texto}`));
+                divPregunta.appendChild(label);
+            });
+
+            const feedback = document.createElement("p");
+            feedback.classList.add("feedback");
+            feedback.id = `feedback-q${numPregunta}`;
+            divPregunta.appendChild(feedback);
+
+            contenedor.appendChild(divPregunta);
+        });
+    }
+
+    function calcularResultado() {
+        let puntaje = 0;
+        preguntasSeleccionadas.forEach((pregunta, index) => {
+            const numPregunta = index + 1;
+            const seleccion = document.querySelector(`input[name="q${numPregunta}"]:checked`);
+            const feedbackElement = document.getElementById(`feedback-q${numPregunta}`);
+
+            if (seleccion && seleccion.value === pregunta.respuestaCorrecta) {
+                puntaje++;
+                feedbackElement.textContent = "¡Correcto!";
+                feedbackElement.style.color = "green";
+            } else {
+                feedbackElement.textContent = `Incorrecto. La respuesta correcta es: ${pregunta.respuestaCorrecta}`;
+                feedbackElement.style.color = "red";
+            }
+        });
+
+        const resultadoElement = document.getElementById("resultado");
+        resultadoElement.innerHTML = `Tu puntaje es: ${puntaje} de ${preguntasSeleccionadas.length}`;
+
+        if (puntaje === preguntasSeleccionadas.length) {
+            document.getElementById("trophy").style.display = "block";
+        } else {
+            document.getElementById("trophy").style.display = "none";
+        }
+
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.disabled = true;
+        });
+
+        const botonEnviar = document.querySelector('button[onclick="calcularResultado()"]');
+        botonEnviar.disabled = true;
+    }
+
+    function reiniciarCuestionario() {
+        // Incrementar contador de reinicios ANTES de verificar
+        reiniciosRealizados++;
+
+        // Verificar si es el último intento (2 reinicios + carga inicial = 3)
+        if (reiniciosRealizados >= 2) {
+            bloquearBotonReinicio();
+        }
+
+        // Reiniciar componentes del cuestionario
+        seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+        document.getElementById("resultado").innerHTML = "";
+        document.getElementById("trophy").style.display = "none";
+
+        // REINICIAR TEMPORIZADOR (corrección clave)
+        tiempoRestante = 150;
+        actualizarTemporizador();
+        iniciarTemporizador();
+
+        // Restablecer controles
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+            radio.disabled = false;
+        });
+
+        const botonEnviar = document.querySelector('button[onclick="calcularResultado()"]');
+        if (botonEnviar) botonEnviar.disabled = false;
+
+        actualizarIntentosRestantes();
+    }
+
+    function bloquearBotonReinicio() {
+        const botonReiniciar = document.getElementById('btnReiniciar');
+        botonReiniciar.disabled = true;
+        botonReiniciar.style.backgroundColor = "#bbb";
+        botonReiniciar.style.color = "#666";
+        botonReiniciar.style.cursor = "not-allowed";
+        botonReiniciar.textContent = "Reinicio bloqueado";
+    }
+
+    function actualizarIntentosRestantes() {
+        // Ajustado: 3 intentos totales (1 inicial + 2 reinicios)
+        const intentosRestantes = 2 - reiniciosRealizados; 
+        const intentosDiv = document.getElementById("intentosRestantes");
+        
+        if (intentosDiv) {
+            intentosDiv.textContent = `Intentos restantes: ${intentosRestantes}`;
+            intentosDiv.classList.toggle("cero", intentosRestantes === 0);
+        }
+    }
+
+    window.onload = function() {
+        // Inicialización cuenta como primer intento
+        seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+        actualizarTemporizador();
+        iniciarTemporizador();
+        actualizarIntentosRestantes(); // Mostrará 2 intentos restantes
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completa la Frase - Emisión Electrónica de los Átomos</title>
+    <link rel="stylesheet" href="styleCompletarFrase.css">
+  
+</head>
+
+<!--popo /-->
+<header>
+    <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+    <nav>
+  
+        <ul>
+            <div class="cards">
+                <a href="index.html" class="card red">
+  
+                    <p class="tip">Inicio</p>
+                </a>
+  
+                <a href="cuestionarioA6.html" class="card blue">
+                    <p class="tip">Cuestionarios</p>
+                </a>
+  
+                <a href="articulo6.html" class="card green">
+                    <p class="tip">Ver articulo</p>
+                </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+  </header>
+  <!-- se acaba la popo/-->
+
+<body>
+    <div class="container">
+        <h2 class="Titulo">Completa la Frase - Aplicaciones tecnológicas de la emisión electrónica
+de los átomos</h2>
+
+        <!-- Ejercicio 1 -->
+        <div class="frase">
+            <p>1. La emisión electrónica de los átomos ocurre cuando uno o más <span class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="frase1"></span> son eyectados fuera de un átomo debido a un mecanismo externo, como la aplicación de energía en forma de calor o radiación de electrones acelerados.</p>
+        </div>
+
+        <!-- Ejercicio 2 -->
+        <div class="frase">
+            <p>2. La emisión de electrones por efecto de campo se produce mediante la aplicación de <span class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="frase2"></span> de tipo eléctrico de origen externo, los cuales pueden tener aplicaciones como la producción de microscopios electrónicos de alta resolución.</p>
+        </div>
+
+        <!-- Ejercicio 3 -->
+        <div class="frase">
+            <p>3. La emisión térmica de electrones, también conocida como <span class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="frase3"></span>, se basa en el calentamiento de la superficie de un cuerpo para provocar la emisión de electrones a través de la energía térmica.</p>
+        </div>
+
+        <!-- Ejercicio 4 -->
+        <div class="frase">
+            <p>4. Uno de los usos de la emisión electrónica por efecto de campo es la creación de <span class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="frase4"></span> de electrones con determinado brillo, los cuales son fundamentales en el desarrollo de microscopios electrónicos.</p>
+        </div>
+
+        <!-- Ejercicio 5 -->
+        <div class="frase">
+            <p>5. La emisión térmica de electrones se utiliza en la producción de <span class="droppable" ondrop="drop(event)" ondragover="allowDrop(event)" id="frase5"></span> de vacío de alta frecuencia, que son cruciales en el campo de la electrónica.</p>
+        </div>
+
+        <!-- Palabras arrastrables (respuestas correctas y trampa) -->
+        <div class="respuestas">
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="electrones">electrones</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="campos">campos</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="emision-termoionica">emisión termoiónica</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="fuentes">fuentes</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="transistores">transistores</span>
+            <!-- Respuestas trampa -->
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="protones">protones</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="neutrones">neutrones</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="igual">igual</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="rayos">rayos</span>
+            <span class="draggable" draggable="true" ondragstart="drag(event)" id="electronica">electrónica</span>
+        </div>
+
+        <!-- Botones -->
+        <div class="botones">
+            <button onclick="verificarRespuesta()">Verificar</button>
+            <button onclick="resetearRespuestas()">Resetear</button>
+        </div>
+        <p id="mensaje"></p>
+    </div>
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            let data = event.dataTransfer.getData("text");
+            let dropZone = event.target;
+            
+            // Verificar si el dropZone está vacío
+            if (!dropZone.textContent) {
+                dropZone.textContent = document.getElementById(data).textContent;
+                dropZone.dataset.answer = data;
+            }
+        }
+
+        function verificarRespuesta() {
+            let frases = document.querySelectorAll(".frase");
+            let mensaje = document.getElementById("mensaje");
+            let todosCorrectos = true;
+            let mensajeFinal = "";
+            
+            // Respuestas correctas esperadas para cada ejercicio
+            let respuestasEsperadas = [
+                ["electrones"], // Ejercicio 1
+                ["campos"], // Ejercicio 2
+                ["emision-termoionica"], // Ejercicio 3
+                ["fuentes"], // Ejercicio 4
+                ["transistores"] // Ejercicio 5
+            ];
+            
+            frases.forEach((frase, index) => {
+                let dropZones = frase.querySelectorAll(".droppable");
+                let respuestasCorrectas = 0;
+
+                dropZones.forEach((dropZone, i) => {
+                    if (dropZone.dataset.answer === respuestasEsperadas[index][i]) {
+                        respuestasCorrectas++;
+                        dropZone.classList.remove("incorrecto");
+                        dropZone.classList.add("correcto");
+                    } else {
+                        dropZone.classList.remove("correcto");
+                        dropZone.classList.add("incorrecto");
+                        todosCorrectos = false;
+                    }
+                });
+                
+                if (respuestasCorrectas === dropZones.length) {
+                    mensajeFinal += `Ejercicio ${index + 1}: Correcto.<br>`;
+                } else {
+                    mensajeFinal += `Ejercicio ${index + 1}: Incorrecto.<br>`;
+                }
+            });
+            
+            if (todosCorrectos) {
+                mensaje.innerHTML = "¡Todos los ejercicios son correctos!<br>" + mensajeFinal;
+                mensaje.style.color = "green";
+            } else {
+                mensaje.innerHTML = "Algunos ejercicios son incorrectos.<br>" + mensajeFinal;
+                mensaje.style.color = "red";
+            }
+        }
+
+        function resetearRespuestas() {
+            let dropZones = document.querySelectorAll(".droppable");
+            let mensaje = document.getElementById("mensaje");
+            
+            // Limpiar el contenido y estilos de los recuadros
+            dropZones.forEach(dropZone => {
+                dropZone.textContent = "";
+                delete dropZone.dataset.answer;
+                dropZone.classList.remove("correcto", "incorrecto");
+            });
+            
+            // Restablecer el mensaje
+            mensaje.textContent = "";
+        }
+    </script>
+</body>
+</html>

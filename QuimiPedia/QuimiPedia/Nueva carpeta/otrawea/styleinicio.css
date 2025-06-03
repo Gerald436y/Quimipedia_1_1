@@ -1,0 +1,167 @@
+.articulos-container {
+  display: grid;
+  grid-template-columns: repeat(3, 230px);
+  grid-gap: 15px 110px;
+  justify-items: center;
+  padding: 10px 145px;
+  max-width: 1200px;
+  margin: 0 auto;
+  }
+  /* From Uiverse.io by gagan-gv*/ 
+
+ header img{
+    margin-left: 560px;
+  }
+
+  .articulo {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: transform 0.3s;
+  margin: 5px;
+  }
+  
+  .articulo img {
+  width: 100%;
+  border-radius: 15px;
+  transition: transform 0.3s;
+  }
+  
+  .articulo p {
+  position: absolute;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-size: 1.2rem;
+  }
+  
+  .articulo:hover img {
+  transform: scale(1.1);
+  }
+  
+  .articulo:hover {
+  transform: translateY(-12px);
+  }
+  
+  .titulo-temas {
+  font-size: 34px;
+  font-weight: bold;
+  color: #2a1f57e4;
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
+  }
+  
+  .titulo-temas::before {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background-color: #2a1f57e4;
+  border-radius: 50px;
+  }
+  
+  section {
+  text-align: center;
+  margin-bottom: 60px;
+  }
+  
+  * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  }
+  
+  body {
+  font-family: 'Arial', sans-serif;
+  background-color: #eedfff;
+  color: #2c2b2c;
+  }
+  
+  header {
+      background-color: #2e0a4e;
+      padding: 60px; /* Reduce el padding para que el logo se acerque al borde superior */
+    }
+    
+    .logo {
+      position: absolute;
+      top: 10px; /* Ajusta la posición vertical del logo */
+      left: 5px; /* Ajusta la posición horizontal del logo para que se extienda a lo ancho */
+      width: 390px; /* Ajusta el ancho del logo para que se extienda a lo ancho */
+      height: 110px; /* Mantén la altura del logo */
+      object-fit: cover; /* Ajusta la imagen para que se adapte al tamaño del logo */
+    }
+  
+  
+  header h1 {
+  color: white;
+  font-size: 2.5rem;
+  }
+  
+  .button-container {
+      display: flex;
+      width: 500px;
+      height: 60px;
+      align-items: center;
+      justify-content: space-around;
+      border-radius: 40px;
+            position: absolute; /* Agrega esto */
+            top: 20px; /* Agrega esto */
+            right: 20px; /* Agrega esto */
+    }
+    
+    .button {
+      outline: 0 !important;
+      border: 0 !important;
+      width: 50px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      transition: all ease-in-out 0.3s;
+      cursor: pointer;
+    }
+    
+    .button:hover {
+      transform: translateY(-5.5px);
+    }
+    
+    .icon {
+      font-size: 30px;
+    }
+
+
+  main {
+  padding: 40px 20px;
+  }
+  
+  .btn {
+  display: inline-block;
+  padding: 15px 30px;
+  background-color: #2a1f57e4;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  transition: background-color 0.3s;
+  }
+  
+  .btn:hover {
+  background-color: #58247d;
+  }
+  
+  footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #2a1f57e4;
+  color: white;
+  }

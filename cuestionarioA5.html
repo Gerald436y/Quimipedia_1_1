@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario de Teoría atómica de Bohr</title>
+    <link rel="stylesheet" href="styleCuestionario.css">
+</head>
+<body>
+    <header>
+        <img class="logo" src="IMG/LogoQuimiPedia.png" alt="Logo QuimiPedia">
+        <nav>
+            <ul>
+                <div class="cards">
+                    <a href="index.html" class="card red">
+                        <p class="tip">Inicio</p>
+                    </a>
+
+                    <a href="completarFraseA5.html" class="card blue">
+                        <p class="tip">Completar Frases</p>
+                    </a>
+
+                    <a href="articulo5.html" class="card green">
+                        <p class="tip">Artículo</p>
+                    </a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="barra-superior">
+        <div class="temporizador" id="temporizador">Tiempo restante: 02:30</div>
+        <div class="intentos-restantes" id="intentosRestantes">Intentos restantes: 3</div>
+    </div>
+
+    <main>
+        <h2>Cuestionario de la Configuración electrónica</h2>
+
+        <form id="quiz-form">
+            <div id="preguntas-container"></div>
+            <div class="botones">
+                <button type="button" onclick="calcularResultado()">Enviar respuestas</button>
+                <button type="button" id="btnReiniciar" onclick="reiniciarCuestionario()">Reiniciar cuestionario</button>
+            </div>
+        </form>
+
+        <div id="resultado"></div>
+        <div id="trophy">
+            <img src="IMG/trophy-6387_256.gif" alt="Copa de Premio">
+            <p>¡Felicidades! Has respondido todas las preguntas correctamente.</p>
+        </div>
+    </main>
+
+    <script>
+        const preguntas = [
+        
+        
+    {
+        id: 1,
+        pregunta: "¿Qué es la configuración electrónica?",
+        opciones: [
+            { texto: "Distribución de protones en el núcleo", valor: "a" },
+            { texto: "Distribución de electrones en los niveles de energía", valor: "b" },
+            { texto: "Distribución de neutrones en el núcleo", valor: "c" },
+            { texto: "Distribución de iones en un compuesto", valor: "d" }
+        ],
+        respuestaCorrecta: "Distribución de electrones en los niveles de energía"
+    },
+    {
+        id: 2,
+        pregunta: "¿Qué indica el número cuántico principal (n)?",
+        opciones: [
+            { texto: "La forma del orbital", valor: "a" },
+            { texto: "El nivel de energía del electrón", valor: "b" },
+            { texto: "La orientación del orbital", valor: "c" },
+            { texto: "El spin del electrón", valor: "d" }
+        ],
+        respuestaCorrecta: "El nivel de energía del electrón"
+    },
+    {
+        id: 3,
+        pregunta: "¿Cuál es el número máximo de electrones que puede albergar el nivel n=2?",
+        opciones: [
+            { texto: "2", valor: "a" },
+            { texto: "8", valor: "b" },
+            { texto: "18", valor: "c" },
+            { texto: "32", valor: "d" }
+        ],
+        respuestaCorrecta: "8"
+    },
+    {
+        id: 4,
+        pregunta: "¿Cuál es el orden correcto de llenado de los orbitales según la regla de Aufbau?",
+        opciones: [
+            { texto: "1s, 2s, 2p, 3s, 3p, 4s, 3d", valor: "a" },
+            { texto: "1s, 2s, 2p, 3s, 3p, 3d, 4s", valor: "b" },
+            { texto: "1s, 2s, 2p, 3s, 3p, 4s, 4p, 3d", valor: "c" },
+            { texto: "1s, 2s, 2p, 3s, 3p, 3d, 4s, 4p", valor: "d" }
+        ],
+        respuestaCorrecta: "1s, 2s, 2p, 3s, 3p, 4s, 3d"
+    },
+    {
+        id: 5,
+        pregunta: "¿Qué elemento tiene la configuración electrónica 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s²?",
+        opciones: [
+            { texto: "Radón (Rn)", valor: "a" },
+            { texto: "Radium (Ra)", valor: "b" },
+            { texto: "Uranio (U)", valor: "c" },
+            { texto: "Plutonio (Pu)", valor: "d" }
+        ],
+        respuestaCorrecta: "Radón (Rn)"
+    },
+    {
+        id: 6,
+        pregunta: "¿Qué regla establece que los electrones se distribuyen de manera que maximicen su spin paralelo?",
+        opciones: [
+            { texto: "Regla de Hund", valor: "a" },
+            { texto: "Principio de exclusión de Pauli", valor: "b" },
+            { texto: "Regla de Aufbau", valor: "c" },
+            { texto: "Principio de incertidumbre", valor: "d" }
+        ],
+        respuestaCorrecta: "Regla de Hund"
+    },
+    {
+        id: 7,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de oxígeno (O) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁴", valor: "a" },
+            { texto: "1s² 2s² 2p⁶", valor: "b" },
+            { texto: "1s² 2s² 2p⁵", valor: "c" },
+            { texto: "1s² 2s² 2p³", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁴"
+    },
+    {
+        id: 8,
+        pregunta: "¿Qué principio establece que dos electrones no pueden tener los mismos cuatro números cuánticos?",
+        opciones: [
+            { texto: "Principio de exclusión de Pauli", valor: "a" },
+            { texto: "Regla de Hund", valor: "b" },
+            { texto: "Regla de Aufbau", valor: "c" },
+            { texto: "Principio de incertidumbre de Heisenberg", valor: "d" }
+        ],
+        respuestaCorrecta: "Principio de exclusión de Pauli"
+    },
+    {
+        id: 9,
+        pregunta: "¿Cuál es la configuración electrónica del ion Mg²⁺?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s²", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s¹", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p²", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶"
+    },
+    {
+        id: 10,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de hierro (Fe) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁸", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁵", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁷", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶"
+    },
+    {
+        id: 11,
+        pregunta: "¿Cuántos orbitales hay en el subnivel 'd'?",
+        opciones: [
+            { texto: "1", valor: "a" },
+            { texto: "3", valor: "b" },
+            { texto: "5", valor: "c" },
+            { texto: "7", valor: "d" }
+        ],
+        respuestaCorrecta: "5"
+    },
+    {
+        id: 12,
+        pregunta: "¿Cuál es el número máximo de electrones que puede albergar un orbital?",
+        opciones: [
+            { texto: "1", valor: "a" },
+            { texto: "2", valor: "b" },
+            { texto: "4", valor: "c" },
+            { texto: "8", valor: "d" }
+        ],
+        respuestaCorrecta: "2"
+    },
+    {
+        id: 13,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de cobre (Cu) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁹", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d¹⁰", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁸", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d¹⁰"
+    },
+    {
+        id: 14,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de plata (Ag) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d¹⁰", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁹", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁹", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d¹⁰"
+    },
+    {
+        id: 15,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de argón (Ar)?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s²", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶"
+    },
+    {
+        id: 16,
+        pregunta: "¿Cuál es la configuración electrónica del ion Cl⁻?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁵", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s²", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶"
+    },
+    {
+        id: 17,
+        pregunta: "¿Cuál es la configuración electrónica del ion Fe³⁺?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d³", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁵", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁴", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 3d⁵"
+    },
+    {
+        id: 18,
+        pregunta: "¿Cuál es la configuración electrónica del ion O²⁻?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶", valor: "a" },
+            { texto: "1s² 2s² 2p⁴", valor: "b" },
+            { texto: "1s² 2s² 2p⁵", valor: "c" },
+            { texto: "1s² 2s² 2p³", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶"
+    },
+    {
+        id: 19,
+        pregunta: "¿Cuál es la configuración electrónica del ion Na⁺?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s¹", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s²", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p¹", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶"
+    },
+    {
+        id: 20,
+        pregunta: "¿Cuál es la configuración electrónica del ion Al³⁺?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s²", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p¹", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶"
+    },
+    {
+        id: 21,
+        pregunta: "¿Cuál es el elemento con configuración electrónica 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s²?",
+        opciones: [
+            { texto: "Radón (Rn)", valor: "a" },
+            { texto: "Radium (Ra)", valor: "b" },
+            { texto: "Uranio (U)", valor: "c" },
+            { texto: "Plutonio (Pu)", valor: "d" }
+        ],
+        respuestaCorrecta: "Radón (Rn)"
+    },
+    {
+        id: 22,
+        pregunta: "¿Cuál es el elemento con configuración electrónica 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁶?",
+        opciones: [
+            { texto: "Oganesón (Og)", valor: "a" },
+            { texto: "Rutherfordio (Rf)", valor: "b" },
+            { texto: "Seaborgio (Sg)", valor: "c" },
+            { texto: "Bohrio (Bh)", valor: "d" }
+        ],
+        respuestaCorrecta: "Oganesón (Og)"
+    },
+    {
+        id: 23,
+        pregunta: "¿Cuál es el elemento con configuración electrónica 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁷?",
+        opciones: [
+            { texto: "Americio (Am)", valor: "a" },
+            { texto: "Curio (Cm)", valor: "b" },
+            { texto: "Berkelio (Bk)", valor: "c" },
+            { texto: "Californio (Cf)", valor: "d" }
+        ],
+        respuestaCorrecta: "Americio (Am)"
+    },
+    {
+        id: 24,
+        pregunta: "¿Cuál es el elemento con configuración electrónica 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁶?",
+        opciones: [
+            { texto: "Oganesón (Og)", valor: "a" },
+            { texto: "Rutherfordio (Rf)", valor: "b" },
+            { texto: "Seaborgio (Sg)", valor: "c" },
+            { texto: "Bohrio (Bh)", valor: "d" }
+        ],
+        respuestaCorrecta: "Oganesón (Og)"
+    },
+    {
+        id: 25,
+        pregunta: "¿Cuál es el elemento con configuración electrónica 1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f¹⁴ 6d¹⁰ 7p⁶?",
+        opciones: [
+            { texto: "Oganesón (Og)", valor: "a" },
+            { texto: "Rutherfordio (Rf)", valor: "b" },
+            { texto: "Seaborgio (Sg)", valor: "c" },
+            { texto: "Bohrio (Bh)", valor: "d" }
+        ],
+        respuestaCorrecta: "Oganesón (Og)"
+    },
+    {
+        id: 26,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de cromo (Cr) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁴", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d⁵", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁵", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d⁶", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s¹ 3d⁵"
+    },
+    {
+        id: 27,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de molibdeno (Mo) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁴", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁵", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁵", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁶", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁵"
+    },
+    {
+        id: 28,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de plata (Ag) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d¹⁰", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d⁹", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d⁹", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s¹ 4d¹⁰"
+    },
+    {
+        id: 29,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de oro (Au) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s¹ 4f¹⁴ 5d¹⁰", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d⁹", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s¹ 4f¹⁴ 5d⁹", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s¹ 4f¹⁴ 5d¹⁰"
+    },
+    {
+        id: 30,
+        pregunta: "¿Cuál es la configuración electrónica del átomo de uranio (U) en su estado basal?",
+        opciones: [
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f³ 6d¹", valor: "a" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁴", valor: "b" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f³ 6d¹", valor: "c" },
+            { texto: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f⁴", valor: "d" }
+        ],
+        respuestaCorrecta: "1s² 2s² 2p⁶ 3s² 3p⁶ 4s² 3d¹⁰ 4p⁶ 5s² 4d¹⁰ 5p⁶ 6s² 4f¹⁴ 5d¹⁰ 6p⁶ 7s² 5f³ 6d¹"
+    }
+];
+
+     let preguntasSeleccionadas = [];
+    let tiempoRestante = 150; 
+    let intervalo;
+    let reiniciosRealizados = 0;
+
+    function iniciarTemporizador() {
+        // Limpiar intervalo previo SIEMPRE
+        clearInterval(intervalo);
+        
+        intervalo = setInterval(() => {
+            tiempoRestante--;
+            actualizarTemporizador();
+            if (tiempoRestante <= 0) {
+                clearInterval(intervalo);
+                calcularResultado();
+                alert("¡Tiempo agotado! Se han enviado tus respuestas.");
+            }
+        }, 1000);
+    }
+
+    function actualizarTemporizador() {
+        const minutos = Math.floor(tiempoRestante / 60);
+        const segundos = tiempoRestante % 60;
+        document.getElementById("temporizador").textContent = `Tiempo restante: ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
+    }
+
+    function seleccionarPreguntasAleatorias() {
+        preguntasSeleccionadas = preguntas.sort(() => Math.random() - 0.5).slice(0, 10);
+    }
+
+     function mostrarPreguntas() {
+        const contenedor = document.getElementById("preguntas-container");
+        contenedor.innerHTML = "";
+
+        preguntasSeleccionadas.forEach((pregunta, index) => {
+            const numPregunta = index + 1;
+            const divPregunta = document.createElement("div");
+            divPregunta.classList.add("question");
+
+            const textoPregunta = document.createElement("p");
+            textoPregunta.textContent = `${numPregunta}. ${pregunta.pregunta}`;
+            divPregunta.appendChild(textoPregunta);
+
+            pregunta.opciones.forEach(opcion => {
+                const label = document.createElement("label");
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = `q${numPregunta}`;
+                input.value = opcion.valor;
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(` ${opcion.texto}`));
+                divPregunta.appendChild(label);
+            });
+
+            const feedback = document.createElement("p");
+            feedback.classList.add("feedback");
+            feedback.id = `feedback-q${numPregunta}`;
+            divPregunta.appendChild(feedback);
+
+            contenedor.appendChild(divPregunta);
+        });
+    }
+
+    function calcularResultado() {
+        let puntaje = 0;
+        preguntasSeleccionadas.forEach((pregunta, index) => {
+            const numPregunta = index + 1;
+            const seleccion = document.querySelector(`input[name="q${numPregunta}"]:checked`);
+            const feedbackElement = document.getElementById(`feedback-q${numPregunta}`);
+
+            if (seleccion && seleccion.value === pregunta.respuestaCorrecta) {
+                puntaje++;
+                feedbackElement.textContent = "¡Correcto!";
+                feedbackElement.style.color = "green";
+            } else {
+                feedbackElement.textContent = `Incorrecto. La respuesta correcta es: ${pregunta.respuestaCorrecta}`;
+                feedbackElement.style.color = "red";
+            }
+        });
+
+        const resultadoElement = document.getElementById("resultado");
+        resultadoElement.innerHTML = `Tu puntaje es: ${puntaje} de ${preguntasSeleccionadas.length}`;
+
+        if (puntaje === preguntasSeleccionadas.length) {
+            document.getElementById("trophy").style.display = "block";
+        } else {
+            document.getElementById("trophy").style.display = "none";
+        }
+
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.disabled = true;
+        });
+
+        const botonEnviar = document.querySelector('button[onclick="calcularResultado()"]');
+        botonEnviar.disabled = true;
+    }
+
+    function reiniciarCuestionario() {
+        // Incrementar contador de reinicios ANTES de verificar
+        reiniciosRealizados++;
+
+        // Verificar si es el último intento (2 reinicios + carga inicial = 3)
+        if (reiniciosRealizados >= 2) {
+            bloquearBotonReinicio();
+        }
+
+        // Reiniciar componentes del cuestionario
+        seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+        document.getElementById("resultado").innerHTML = "";
+        document.getElementById("trophy").style.display = "none";
+
+        // REINICIAR TEMPORIZADOR (corrección clave)
+        tiempoRestante = 150;
+        actualizarTemporizador();
+        iniciarTemporizador();
+
+        // Restablecer controles
+        const radios = document.querySelectorAll('input[type="radio"]');
+        radios.forEach(radio => {
+            radio.checked = false;
+            radio.disabled = false;
+        });
+
+        const botonEnviar = document.querySelector('button[onclick="calcularResultado()"]');
+        if (botonEnviar) botonEnviar.disabled = false;
+
+        actualizarIntentosRestantes();
+    }
+
+    function bloquearBotonReinicio() {
+        const botonReiniciar = document.getElementById('btnReiniciar');
+        botonReiniciar.disabled = true;
+        botonReiniciar.style.backgroundColor = "#bbb";
+        botonReiniciar.style.color = "#666";
+        botonReiniciar.style.cursor = "not-allowed";
+        botonReiniciar.textContent = "Reinicio bloqueado";
+    }
+
+    function actualizarIntentosRestantes() {
+        // Ajustado: 3 intentos totales (1 inicial + 2 reinicios)
+        const intentosRestantes = 2 - reiniciosRealizados; 
+        const intentosDiv = document.getElementById("intentosRestantes");
+        
+        if (intentosDiv) {
+            intentosDiv.textContent = `Intentos restantes: ${intentosRestantes}`;
+            intentosDiv.classList.toggle("cero", intentosRestantes === 0);
+        }
+    }
+
+    window.onload = function() {
+        // Inicialización cuenta como primer intento
+        seleccionarPreguntasAleatorias();
+        mostrarPreguntas();
+        actualizarTemporizador();
+        iniciarTemporizador();
+        actualizarIntentosRestantes(); // Mostrará 2 intentos restantes
+    };
+</script>
+</body>
+</html>
